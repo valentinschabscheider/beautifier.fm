@@ -51,7 +51,6 @@ function Init() {
     });
 }
 
-
 function parseDataAndCreateRows() {
 
     // clear table
