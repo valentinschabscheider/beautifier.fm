@@ -25,12 +25,15 @@
 </head>
 
 <body onload="Init()">
-    <div>
-        <input type="radio" id="api" name="choice" value="api" checked>
-        <label for="api">API</label>
-        <input type="radio" id="csv" name="choice" value="csv">
-        <label for="csv">CSV</label>
+    <div class="btn-group btn-group-toggle mb-3">
+        <label class="btn btn-primary active">
+            <input type="radio" name="options" id="api" value="api" autocomplete="off" checked> API
+        </label>
+        <label class="btn btn-primary">
+            <input type="radio" name="options" id="csv" value="csv" autocomplete="off"> CSV
+        </label>
     </div>
+    </br>
     <div id="csvContainer" hidden>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
