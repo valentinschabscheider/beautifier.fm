@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <!-- Styling Section -->
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <!-- Third Party Section -->
+    <script type="text/javascript" src="papaparse/papaparse.min.js"></script>
+    <script type="text/javascript" src="lastfm/lastfm.api.md5.js"></script>
+    <script type="text/javascript" src="lastfm/lastfm.api.js"></script>
+
+    <!-- Script Section -->
+    <script type="text/javascript" src="lastfm.js"></script>
+    <script type="text/javascript" src="beautifier.js"></script>
+    <script type="text/javascript" src="utility.js"></script>
+</head>
+
+<body onload="Init()">
+    <input type="radio" id="api" name="choice" value="api">
+    <label for="api">API</label><br>
+    <input type="radio" id="csv" name="choice" value="csv">
+    <label for="csv">CSV</label><br>
+    <input type="file" id="csvFile" name="files" />
+    </br>
+    </br>
+    <input type="text" id="filter" placeholder="Version, Edition, Remastered" />
+    </br>
+
+    </br>
+    </br>
+    <table id="scrobbleTable" class="minimalistBlack">
+        <thead>
+            <tr>
+                <th>Artist</th>
+                <th>Track</th>
+                <th>Album</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+
+</html>
