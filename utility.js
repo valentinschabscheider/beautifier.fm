@@ -24,3 +24,15 @@ function GetLastFmTrackURLForUser(username, artist, album, track) {
         album.replace(StringConstants.Space, StringConstants.Plus) + StringConstants.Slash +
         track.replace(StringConstants.Space, StringConstants.Plus);
 }
+
+
+function ShowElement(elementId) {
+    var element = document.getElementById(elementId);
+    element.removeAttribute("hidden");
+}
+
+
+function HideElement(elementId) {
+    var element = document.getElementById(elementId);
+    element.setAttribute("hidden", "");
+}

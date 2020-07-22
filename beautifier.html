@@ -14,9 +14,9 @@
     <script type="text/javascript" src="lastfm/lastfm.api.js"></script>
 
     <!-- Script Section -->
+    <script type="text/javascript" src="utility.js"></script>
     <script type="text/javascript" src="lastfm.js"></script>
     <script type="text/javascript" src="beautifier.js"></script>
-    <script type="text/javascript" src="utility.js"></script>
 </head>
 
 <body onload="Init()">
@@ -24,12 +24,16 @@
     <label for="api">API</label><br>
     <input type="radio" id="csv" name="choice" value="csv">
     <label for="csv">CSV</label><br>
-    <input type="file" id="csvFile" name="files" />
     </br>
     </br>
-    <input type="text" id="filter" placeholder="Version, Edition, Remastered" />
+    <div id="csvContainer">
+        <input type="file" id="csvFile" name="files" />
+        <input type="text" id="filter" placeholder="Version, Edition, Remastered" />
+    </div>
+    <div id="apiContainer">
+        <input type="text" id="usernameField" placeholder="Last.fm username" />
+    </div>
     </br>
-
     </br>
     </br>
     <table id="scrobbleTable" class="minimalistBlack">
