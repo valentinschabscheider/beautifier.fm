@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "beautifier.fm",
+  "version": "0.1",
+
+  "description": "Beautify your filthy scrobbles.",
+
+  "icons": {
+    "48": "icons/48.png",
+    "96": "icons/96.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.last.fm/*"],
+      "js": ["borderify.js"]
+    }
+  ]
+}
