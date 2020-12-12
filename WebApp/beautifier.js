@@ -211,7 +211,7 @@ async function getAllTracks() {
     var pageCount = 999;
 
     while (i < pageCount) {
-        lastfm.user.getRecentTracks({ user: "Pantera97", page: i }, {
+        lastfm.user.getRecentTracks({ user: document.getElementById('usernameField').value, page: i }, {
             success: function(data) {
                 pageCount = data.recenttracks["@attr"].totalPages;
 
