@@ -199,8 +199,8 @@ function getRecentTracks(userName) {
             }
 
         },
-        error: function(message) {
-            alert("hoitas do hods wos: " + message);
+        error: function(code, message) {
+            console.log("FEHLER: " + code + " -- MESSAGE: " + message);
         }
     });
 }
@@ -208,14 +208,9 @@ function getRecentTracks(userName) {
 
 async function getAllTracks() {
     var i = 1;
-    var allData = new Array();
     var pageCount = 999;
 
     while (i < pageCount) {
-
-        //await new Promise(r => setTimeout(r, 2000));
-        //console.log("page " + i + " is being done");
-
         lastfm.user.getRecentTracks({ user: "Pantera97", page: i }, {
             success: function(data) {
                 pageCount = data.recenttracks["@attr"].totalPages;
@@ -224,7 +219,7 @@ async function getAllTracks() {
 
                     var obj = data[key].track;
                     for (j = 0; j < obj.length; j++) {
-                        allData.push(obj[j]);
+                        addRowAPI(obj[j]);
                     }
                 }
 
@@ -234,11 +229,9 @@ async function getAllTracks() {
             }
         });
 
-        document.getElementById('progressBar').value = i / pageCount;
+        document.getElementById('pageProgressCount').textContent = "Page " + i + " / " + pageCount;
         i++;
     }
-
-    console.log(allData);
 }
 
 
