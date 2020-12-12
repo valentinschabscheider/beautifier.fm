@@ -41,7 +41,7 @@
             </div>
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="csvFile" name="files">
-                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                <label class="custom-file-label" for="csvFile">Choose file</label>
             </div>
         </div>
         <div class="input-group mb-3">
@@ -57,9 +57,10 @@
             <input type="text" class="form-control" id="usernameField" placeholder="Last.fm username" aria-label="Last.fm username" aria-describedby="basic-addon1">
         </div>
     </div>
+    <button onclick="getAllTracks()">get all test</button><progress id="progressBar" max="100"></progress>
     <div class="tableDiv">
         <table id="scrobbleTable" class="table table-hover table-fixed">
-            <thead class="thead-dark table-primary">
+            <thead class="thead-dark">
                 <tr>
                     <th>Artist</th>
                     <th>Track</th>
