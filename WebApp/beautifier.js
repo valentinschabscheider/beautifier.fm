@@ -207,11 +207,18 @@ function getRecentTracks(userName) {
 
 
 async function getAllTracks() {
+
+    var username = document.getElementById('usernameField').value;
+
+    if (username === "" || username === null) {
+        return;
+    }
+
     var i = 1;
     var pageCount = 999;
 
     while (i < pageCount) {
-        lastfm.user.getRecentTracks({ user: document.getElementById('usernameField').value, page: i }, {
+        lastfm.user.getRecentTracks({ user: username, page: i }, {
             success: function(data) {
                 pageCount = data.recenttracks["@attr"].totalPages;
 
