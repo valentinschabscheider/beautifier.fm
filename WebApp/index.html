@@ -25,53 +25,61 @@
 </head>
 
 <body onload="Init()">
-    <div class="btn-group btn-group-toggle mb-3">
-        <label class="btn btn-dark active">
+    <div id="mainContent">
+        <div class="btn-group btn-group-toggle mb-3">
+            <label class="btn btn-dark active">
             <input type="radio" name="options" id="api" value="api" autocomplete="off" checked> API
         </label>
-        <label class="btn btn-dark">
+            <label class="btn btn-dark">
             <input type="radio" name="options" id="csv" value="csv" autocomplete="off"> CSV
         </label>
-    </div>
-    </br>
-    <div id="csvContainer" hidden>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Upload a CSV file</span>
+        </div>
+        </br>
+        <div id="csvContainer" hidden>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Upload a CSV file</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="csvFile" name="files">
+                    <label class="custom-file-label" for="csvFile">Choose file</label>
+                </div>
             </div>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="csvFile" name="files">
-                <label class="custom-file-label" for="csvFile">Choose file</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                </div>
+                <input type="text" class="form-control" id="filter" placeholder="Search for ... Remastered, Version" aria-label="Search" aria-describedby="basic-addon1">
             </div>
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
+        <div id="apiContainer">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                </div>
+                <input type="text" class="form-control" id="usernameField" placeholder="Last.fm username" aria-label="Last.fm username" aria-describedby="basic-addon1">
             </div>
-            <input type="text" class="form-control" id="filter" placeholder="Search for ... Remastered, Version" aria-label="Search" aria-describedby="basic-addon1">
+        </div>
+        <button onclick="getAllTracks()">get all test</button>&nbsp;<label id="pageProgressCount">Page 0 / 0</label>
+        <div class="tableDiv">
+            <table id="scrobbleTable" class="table table-hover table-fixed">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Artist</th>
+                        <th>Track</th>
+                        <th>Album</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
     </div>
-    <div id="apiContainer">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-            </div>
-            <input type="text" class="form-control" id="usernameField" placeholder="Last.fm username" aria-label="Last.fm username" aria-describedby="basic-addon1">
+    <!-- Footer -->
+    <footer class="page-footer font-small blue">
+        <div class="footer-copyright text-center py-3">
+            © 2020 Copyright DAVAL
         </div>
-    </div>
-    <button onclick="getAllTracks()">get all test</button>&nbsp;<label id="pageProgressCount">Page 0 / 0</label>
-    <div class="tableDiv">
-        <table id="scrobbleTable" class="table table-hover table-fixed">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Artist</th>
-                    <th>Track</th>
-                    <th>Album</th>
-                    <th>Timestamp</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
+    </footer>
 </body>
 
 </html>
