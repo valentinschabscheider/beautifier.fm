@@ -95,16 +95,21 @@ function addRow(obj) {
         var timestamp = obj[3] || "";
 
         var row = document.createElement("tr");
-        row.setAttribute("onclick", "window.location='" + GetLastFmTrackURL(artist, album, track) + "'");
 
         var artistNode = document.createElement("td");
-        artistNode.appendChild(document.createTextNode(artist));
+        var artistAnchor = artistNode.appendChild(document.createElement("a"));
+        artistAnchor.setAttribute('href', GetLastFmArtistURL(artist));
+        artistAnchor.innerHTML = artist;
 
         var albumNode = document.createElement("td");
-        albumNode.appendChild(document.createTextNode(album));
+        var albumAnchor = albumNode.appendChild(document.createElement("a"));
+        albumAnchor.setAttribute('href', GetLastFmAlbumURL(artist, album));
+        albumAnchor.innerHTML = album;
 
         var trackNode = document.createElement("td");
-        trackNode.appendChild(document.createTextNode(track));
+        var trackAnchor = trackNode.appendChild(document.createElement("a"));
+        trackAnchor.setAttribute('href', GetLastFmTrackURL(artist, album, track));
+        trackAnchor.innerHTML = track;
 
         var timestampNode = document.createElement("td");
         timestampNode.appendChild(document.createTextNode(timestamp));
@@ -138,16 +143,21 @@ function addRowAPI(obj) {
         var timestamp = obj.date["#text"]
 
         var row = document.createElement("tr");
-        row.setAttribute("onclick", "window.location='" + GetLastFmTrackURL(artist, album, track) + "'");
 
         var artistNode = document.createElement("td");
-        artistNode.appendChild(document.createTextNode(artist));
+        var artistAnchor = artistNode.appendChild(document.createElement("a"));
+        artistAnchor.setAttribute('href', GetLastFmArtistURL(artist));
+        artistAnchor.innerHTML = artist;
 
         var albumNode = document.createElement("td");
-        albumNode.appendChild(document.createTextNode(album));
+        var albumAnchor = albumNode.appendChild(document.createElement("a"));
+        albumAnchor.setAttribute('href', GetLastFmAlbumURL(artist, album));
+        albumAnchor.innerHTML = album;
 
         var trackNode = document.createElement("td");
-        trackNode.appendChild(document.createTextNode(track));
+        var trackAnchor = trackNode.appendChild(document.createElement("a"));
+        trackAnchor.setAttribute('href', GetLastFmTrackURL(artist, album, track));
+        trackAnchor.innerHTML = track;
 
         var timestampNode = document.createElement("td");
         timestampNode.appendChild(document.createTextNode(timestamp));

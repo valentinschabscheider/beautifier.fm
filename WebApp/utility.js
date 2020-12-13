@@ -18,6 +18,17 @@ function GetLastFmTrackURL(artist, album, track) {
         track.replace(StringConstants.Space, StringConstants.Plus);
 }
 
+function GetLastFmAlbumURL(artist, album) {
+    return baseUrl +
+        artist.replace(StringConstants.Space, StringConstants.Plus) + StringConstants.Slash +
+        album.replace(StringConstants.Space, StringConstants.Plus) + StringConstants.Slash;
+}
+
+function GetLastFmArtistURL(artist) {
+    return baseUrl +
+        artist.replace(StringConstants.Space, StringConstants.Plus) + StringConstants.Slash;
+}
+
 
 function GetLastFmTrackURLForUser(username, artist, album, track) {
     return baseUrlUser + username + "/library/music/" +
