@@ -20,6 +20,16 @@ body {
     cursor: pointer;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
+    color: red;
+}
+
 thead th {
     position: sticky;
     top: 0;
