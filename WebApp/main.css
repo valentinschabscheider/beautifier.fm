@@ -34,3 +34,11 @@ thead th {
     position: sticky;
     top: 0;
 }
+
+
+/* center logo in navbar*/
+
+.navbar-brand {
+    display: block;
+    margin: auto;
+}
