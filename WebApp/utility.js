@@ -9,6 +9,7 @@ var StringConstants = {
 
 const baseUrl = "https://www.last.fm/music/";
 const baseUrlUser = "https://www.last.fm/user/";
+const urlExtensionLibrary = "/library/music/";
 
 
 function GetLastFmTrackURL(artist, album, track) {
@@ -31,7 +32,7 @@ function GetLastFmArtistURL(artist) {
 
 
 function GetLastFmTrackURLForUser(username, artist, album, track) {
-    return baseUrlUser + username + "/library/music/" +
+    return baseUrlUser + username + urlExtensionLibrary +
         artist.replace(StringConstants.Space, StringConstants.Plus) + StringConstants.Slash +
         album.replace(StringConstants.Space, StringConstants.Plus) + StringConstants.Slash +
         track.replace(StringConstants.Space, StringConstants.Plus);
