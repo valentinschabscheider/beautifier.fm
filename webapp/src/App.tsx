@@ -1,156 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Header from "./components/ui/Header";
 import Footer from "./components/ui/Footer";
+import ProgressBar from "./components/ui/ProgressBar";
+import Controls from "./components/ui/Controls";
+import ScrobbleTable from "./components/ScrobbleTable/ScrobbleTable";
+
+import GridLoader from "react-spinners/GridLoader";
 
 import "./App.css";
 
-function App() {
+import fetchScrobbles from "./components/lastfm";
+import { Scrobble } from "./components/lastfm";
+
+const App: React.FC = () => {
+  //const [userName, setUserName] = useState<string>("");
+  const [progress, setProgress] = useState<number>(-1);
+  const [scrobbles, setScrobbles] = useState<Array<Scrobble>>([]);
+
   return (
     <div className="App">
       <Header />
       <main>
-        <div className="controls">
-          <form>
-            <input id="username" type="text" />
-            <button id="submit" type="submit">
-              go
-            </button>
-          </form>
+        <div className="top-container">
+          <Controls
+            startProcess={(u: string) =>
+              fetchScrobbles(u, setProgress, setScrobbles)
+            }
+          />
+          {progress >= 0 && progress < 100 && (
+            <ProgressBar value={Math.round(progress)} />
+          )}
         </div>
-        <div className="scrobble-table">
-          <table>
-            <tr>
-              <th>song</th>
-              <th>album</th>
-              <th>artist</th>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-            <tr>
-              <td>song1</td>
-              <td>album1</td>
-              <td>artist1</td>
-            </tr>
-          </table>
-        </div>
+        {progress >= 0 && progress < 100 ? (
+          <GridLoader size={50} color={"#000"} loading={progress < 100} />
+        ) : (
+          <ScrobbleTable scrobbles={scrobbles} />
+        )}
       </main>
       <Footer />
     </div>
   );
-}
+};
 
 export default App;
