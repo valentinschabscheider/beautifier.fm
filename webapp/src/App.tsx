@@ -32,8 +32,8 @@ const App: React.FC = () => {
             <ProgressBar value={Math.round(progress)} />
           )}
         </div>
-        {progress >= 0 && progress < 100 ? (
-          <GridLoader size={50} color={"#000"} loading={progress < 100} />
+        {progress < 100 ? (
+          <GridLoader size={50} color={"#000"} loading={progress >= 0} />
         ) : (
           <ScrobbleTable scrobbles={scrobbles} />
         )}
