@@ -5,6 +5,8 @@ import BuyMeACoffeeButton from "./BuyMeACoffeeButton";
 import "./Footer.css";
 
 const Footer: React.FC = () => {
+  //add ability to minimize footer or make scrobble table full screen
+
   return (
     <footer>
       <div>

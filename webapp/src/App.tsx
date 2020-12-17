@@ -7,6 +7,7 @@ import Controls from "./components/ui/Controls";
 import ScrobbleTable from "./components/ScrobbleTable/ScrobbleTable";
 
 import GridLoader from "react-spinners/GridLoader";
+import { css } from "@emotion/core";
 
 import "./App.css";
 
@@ -17,6 +18,10 @@ const App: React.FC = () => {
   //const [userName, setUserName] = useState<string>("");
   const [progress, setProgress] = useState<number>(-1);
   const [scrobbles, setScrobbles] = useState<Array<Scrobble>>([]);
+
+  const gridLoaderCss = css`
+    margin: auto;
+  `;
 
   return (
     <div className="App">
@@ -33,7 +38,12 @@ const App: React.FC = () => {
           )}
         </div>
         {progress < 100 ? (
-          <GridLoader size={50} color={"#000"} loading={progress >= 0} />
+          <GridLoader
+            size={50}
+            color={"#000"}
+            loading={progress >= 0}
+            css={gridLoaderCss}
+          />
         ) : (
           <ScrobbleTable scrobbles={scrobbles} />
         )}

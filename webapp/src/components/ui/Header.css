@@ -12,9 +12,7 @@ header {
 }
 
 .logo:hover {
-  animation: color-rotate 2s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  animation: color-rotate 3s linear 0s infinite none;
 }
 
 @keyframes color-rotate {
