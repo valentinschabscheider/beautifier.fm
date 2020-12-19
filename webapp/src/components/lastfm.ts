@@ -62,8 +62,12 @@ const fetchScrobbles = async (
           {
             limit: Number(process.env.REACT_APP_LASTFM_API_PAGE_SIZE),
             page: page,
-            //from: "1601510400", //for testing
-            //extended: "1",
+            ...(process.env.NODE_ENV === "development"
+              ? {
+                  from: process.env.REACT_APP_LASTFM_API_FROM_TIME,
+                  to: process.env.REACT_APP_LASTFM_API_TO_TIME,
+                }
+              : {}),
           }
         );
 
