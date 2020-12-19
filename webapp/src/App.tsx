@@ -8,8 +8,9 @@ import ScrobbleTable from "./components/ScrobbleTable/ScrobbleTable";
 
 import GridLoader from "react-spinners/GridLoader";
 import { css } from "@emotion/core";
+import Colors from "./scss/_colors.module.scss";
 
-import "./App.css";
+import "./App.scss";
 
 import fetchScrobbles from "./components/lastfm";
 import { Scrobble } from "./components/lastfm";
@@ -40,7 +41,7 @@ const App: React.FC = () => {
         {progress < 100 ? (
           <GridLoader
             size={50}
-            color={"#000"}
+            color={Colors.dark}
             loading={progress >= 0}
             css={gridLoaderCss}
           />

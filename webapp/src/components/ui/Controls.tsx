@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./Controls.css";
+import "./Controls.scss";
 
 interface Props {
   startProcess: Function;

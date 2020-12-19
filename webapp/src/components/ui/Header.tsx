@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Header.css";
+import "./Header.scss";
 import logo from "../../img/logo/medium.png";
 
 const Header: React.FC = () => {

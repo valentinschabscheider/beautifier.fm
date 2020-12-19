@@ -2,7 +2,7 @@ import React from "react";
 
 import { Scrobble } from "../lastfm";
 
-import "./ScrobbleTable.css";
+import "./ScrobbleTable.scss";
 
 import noCover from "../../img/no-cover.png";
 
