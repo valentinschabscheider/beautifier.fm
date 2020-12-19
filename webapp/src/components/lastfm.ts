@@ -16,15 +16,16 @@ interface ProcessedResponse {
   scrobbles: Array<Scrobble>;
 }
 
-const API_KEY = "eba566857b4d6eb3a90d8a8da372c2dc";
-const LIMIT = 1000;
-
 const fetchScrobbles = async (
   userName: string,
   setProgress: Function,
   setScrobbles: Function
 ) => {
-  const lastfm = new LastFMTyped(API_KEY, undefined, "beautifier.fm");
+  const lastfm = new LastFMTyped(
+    String(process.env.REACT_APP_LASTFM_API_KEY),
+    undefined,
+    "beautifier.fm"
+  );
 
   let totalPages: number = 0;
   const unfetchedPages: Array<number> = [1];
@@ -58,7 +59,7 @@ const fetchScrobbles = async (
         let response: getRecentTracks = await lastfm.user.getRecentTracks(
           userName,
           {
-            limit: LIMIT,
+            limit: Number(process.env.REACT_APP_LASTFM_API_PAGE_SIZE),
             page: page,
             //from: "1601510400", //for testing
             //extended: "1",
