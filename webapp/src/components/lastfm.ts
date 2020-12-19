@@ -24,7 +24,8 @@ const fetchScrobbles = async (
   const lastfm = new LastFMTyped(
     String(process.env.REACT_APP_LASTFM_API_KEY),
     undefined,
-    "beautifier.fm"
+    "beautifier.fm",
+    true
   );
 
   let totalPages: number = 0;
