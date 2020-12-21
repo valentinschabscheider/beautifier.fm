@@ -21,11 +21,18 @@ jobs:
           SASS_PATH: ./node_modules;./src
           REACT_APP_LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
           REACT_APP_LASTFM_API_PAGE_SIZE: 1000
+      - name: Create dist folder
+        run: mkdir dist
+      - name: Collect firebase and build files
+        run: |
+          mv .firebaserc /dist
+          mv firebase.json /dist
+          mv build /dist
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
-          name: build
-          path: webapp/build
+          name: dist
+          path: webapp/dist
   deploy:
     name: Deploy
     needs: build
@@ -36,8 +43,8 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@master
         with:
-          name: build
-          path: build
+          name: dist
+          path: dist
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
