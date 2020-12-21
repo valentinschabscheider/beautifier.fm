@@ -7,19 +7,20 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./webapp
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Install Dependencies
         run: npm install
-        working-directory: ./webapp
       - name: Build
         run: npm run build
-        working-directory: ./webapp
         env:
           SASS_PATH: ./node_modules;./src
           REACT_APP_LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
-          REACT_APP_LASTFM_API_PAGE_SIZE: ${{ secrets.LASTFM_API_PAGE_SIZE }}
+          REACT_APP_LASTFM_API_PAGE_SIZE: 1000
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
