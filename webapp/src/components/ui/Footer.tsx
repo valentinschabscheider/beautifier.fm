@@ -18,8 +18,8 @@ const Footer: React.FC = () => {
 				<div className="col-xs-12 col-sm-4 col-md-4">
 					<h6>Creator's last.fm accounts</h6>
 					<ul className="list-unstyled quick-links">
-						<li><a href="https://www.last.fm/user/Pantera97"><i className="fa fa-angle-double-right"></i>Pantera97</a></li>
-						<li><a href="https://www.last.fm/user/mrvalstar"><i className="fa fa-angle-double-right"></i>mrvalstar</a></li>
+						<li><a href="https://www.last.fm/user/Pantera97" target="_blank" rel="noreferrer"><i className="fa fa-angle-double-right"></i>Pantera97</a></li>
+						<li><a href="https://www.last.fm/user/mrvalstar" target="_blank" rel="noreferrer"><i className="fa fa-angle-double-right"></i>mrvalstar</a></li>
 					</ul>
 				</div>
 				<div className="col-xs-12 col-sm-4 col-md-4">
