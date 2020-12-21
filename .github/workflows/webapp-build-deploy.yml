@@ -25,9 +25,9 @@ jobs:
         run: mkdir dist
       - name: Collect firebase and build files
         run: |
-          mv .firebaserc /dist
-          mv firebase.json /dist
-          mv build /dist
+          cp .firebaserc dist/
+          cp firebase.json dist/
+          cp -r build dist/
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
