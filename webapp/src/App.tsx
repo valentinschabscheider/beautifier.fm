@@ -12,8 +12,13 @@ import Colors from "./scss/_colors.module.scss";
 
 import "./App.scss";
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+
 import fetchScrobbles from "./components/lastfm";
 import { Scrobble } from "./components/lastfm";
+
+library.add(fas)
 
 const App: React.FC = () => {
   //const [userName, setUserName] = useState<string>("");

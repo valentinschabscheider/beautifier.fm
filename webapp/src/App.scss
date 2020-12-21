@@ -1,13 +1,12 @@
+@import "~bootstrap/scss/bootstrap";
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 main {
-  margin-top: 4rem;
-
-  height: calc(100vh - 4rem - 7rem);
-
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+    margin-top: 4rem;
+    height: calc(100vh - 4rem - 7rem);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
