@@ -12,13 +12,14 @@ import Colors from "./scss/_colors.module.scss";
 
 import "./App.scss";
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 
 import fetchScrobbles from "./components/lastfm";
 import { Scrobble } from "./components/lastfm";
+import CookieConsent from "./components/ui/CookieConsent";
 
-library.add(fas)
+library.add(fas);
 
 const App: React.FC = () => {
   //const [userName, setUserName] = useState<string>("");
@@ -53,6 +54,7 @@ const App: React.FC = () => {
         ) : (
           <ScrobbleTable scrobbles={scrobbles} />
         )}
+        <CookieConsent />
       </main>
       <Footer />
     </div>
