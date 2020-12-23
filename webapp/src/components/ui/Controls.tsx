@@ -27,7 +27,7 @@ const Controls: React.FC<Props> = ({ startProcess }) => {
   };
 
   return (
-    <div className="controls">
+    <div>
       <Form>
           <Form.Group>
                 <InputGroup>

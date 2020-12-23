@@ -2,26 +2,18 @@ import React from "react";
 
 import "./ProgressBar.scss";
 
+import { ProgressBar } from "react-bootstrap";
+
 interface Props {
   value: number;
   text?: string | null;
   css?: object;
 }
 
-const ProgressBar: React.FC<Props> = ({ value, text, css }) => {
+const ProgressBarOwn: React.FC<Props> = ({ value, text, css }) => {
   return (
-    <div className="progress-container" {...(css && { style: css })}>
-      <div
-        id="progress-bar"
-        className="progress-bar"
-        style={{ width: `${value}%` }}
-      >
-        <span style={{ visibility: text === null ? "hidden" : "visible" }}>
-          {text || `${value}%`}
-        </span>
-      </div>
-    </div>
+    <ProgressBar animated striped variant="danger" now={value} label={`${value}%`}/>
   );
 };
 
-export default ProgressBar;
+export default ProgressBarOwn;

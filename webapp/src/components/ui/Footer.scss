@@ -13,16 +13,35 @@ footer {
     padding-top: 1%;
 }
 
-footer a {
+nav {
+    text-decoration: none;
+    color: #fff;
+    flex-direction: column;
+    text-align: center;
+}
+
+nav a {
     text-decoration: none;
     color: #fff;
 }
 
-footer a:hover {
+nav a:hover {
     text-decoration: none;
     color: $color-red;
 }
 
 .buymeacoffee-button img {
     max-height: 3rem;
+}
+
+@media screen and (max-width: 576px) {
+    #desktop-footer {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1260px) {
+    #mobile-footer {
+        display: none;
+    }
 }
