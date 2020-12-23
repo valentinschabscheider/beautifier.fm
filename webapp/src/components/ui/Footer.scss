@@ -34,13 +34,13 @@ nav a:hover {
     max-height: 3rem;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 992px) {
     #desktop-footer {
         display: none;
     }
 }
 
-@media only screen and (min-width: 1260px) {
+@media only screen and (min-width: 992px) {
     #mobile-footer {
         display: none;
     }
