@@ -21,7 +21,7 @@ const MaterialTableOwn: React.FC<Props> = ({ scrobbles, isLoading }) => {
             { title: 'Album', field: 'album', cellStyle: { width: "28%" } },
             { title: 'Timestamp', field: 'timestamp', type: "datetime" }
           ]}
-          data={scrobbles} title=""  isLoading={ isLoading } options={{pageSizeOptions: [5,10,20], pageSize: 10 }}
+          data={scrobbles} title=""  isLoading={ isLoading } options={{pageSizeOptions: [10], pageSize: 10, maxBodyHeight: "50%" }}
           components={{Container: props => <Paper {...props} elevation={0}/>}}
         />
   );

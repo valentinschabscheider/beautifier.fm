@@ -23,7 +23,6 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Header startProcess={(u: string) => fetchScrobbles(u, setProgress, setScrobbles)} />
-      <main>
           {progress >= 0 && progress < 100 && (
             <ProgressBarOwn value={Math.round(progress)} />
           )}
@@ -32,7 +31,6 @@ const App: React.FC = () => {
         ) : (
           <MaterialTableOwn scrobbles={scrobbles} isLoading={ progress < 100 } />
         )}
-      </main>
       <Footer />
     </div>
   );
