@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600&display=swap");
 html,
-body {
-    height: 100%;
-    font-family: "Epilogue", sans-serif;
+body,
+#root {
+  padding: 0;
+  margin: 0;
+  height: 100%;
 }
 
 body {
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
+  font-family: "Epilogue", sans-serif;
 }

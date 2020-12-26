@@ -6,10 +6,6 @@ import ProgressBar from "./components/ui/ProgressBar";
 import Controls from "./components/ui/Controls";
 import ScrobbleTable from "./components/ScrobbleTable/ScrobbleTable";
 
-import GridLoader from "react-spinners/GridLoader";
-import { css } from "@emotion/core";
-import Colors from "./scss/_colors.module.scss";
-
 import "./App.scss";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -19,6 +15,8 @@ import fetchScrobbles from "./components/lastfm";
 import { Scrobble } from "./components/lastfm";
 import CookieConsent from "./components/ui/CookieConsent";
 
+import { CSSTransition } from "react-transition-group";
+
 library.add(fas);
 
 const App: React.FC = () => {
@@ -26,37 +24,55 @@ const App: React.FC = () => {
   const [progress, setProgress] = useState<number>(-1);
   const [scrobbles, setScrobbles] = useState<Array<Scrobble>>([]);
 
-  const gridLoaderCss = css`
-    margin: auto;
-  `;
+  const [showControls, setShowControls] = useState(true);
+  const [showControlsButton, setShowControlsButton] = useState(false);
+
+  const goOrsmth: Function = (u: string) => {
+    fetchScrobbles(u, setProgress, setScrobbles);
+    setShowControls(false);
+    setShowControlsButton(true);
+  };
 
   return (
     <div className="App">
-      <Header />
-      <main>
-        <div className="top-container">
-          <Controls
-            startProcess={(u: string) =>
-              fetchScrobbles(u, setProgress, setScrobbles)
-            }
-          />
-          {progress >= 0 && progress < 100 && (
-            <ProgressBar value={Math.round(progress)} />
-          )}
-        </div>
-        {progress < 100 ? (
-          <GridLoader
-            size={50}
-            color={Colors.dark}
-            loading={progress >= 0}
-            css={gridLoaderCss}
-          />
-        ) : (
-          <ScrobbleTable scrobbles={scrobbles} />
+      <Header>
+        {showControlsButton && (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setShowControls(!showControls);
+            }}
+          >
+            controls
+          </button>
         )}
-        <CookieConsent />
+      </Header>
+      <CSSTransition
+        in={progress >= 0 && progress < 100}
+        unmountOnExit
+        timeout={500}
+        classNames="progress-container"
+      >
+        <ProgressBar value={Math.round(progress)} />
+      </CSSTransition>
+      <main>
+        <CSSTransition
+          in={showControls}
+          unmountOnExit
+          timeout={500}
+          classNames="control-container"
+        >
+          <div className="control-container">
+            <Controls startProcess={goOrsmth} />
+          </div>
+        </CSSTransition>
+
+        <div className="table-container">
+          <ScrobbleTable scrobbles={scrobbles} />
+        </div>
       </main>
       <Footer />
+      <CookieConsent />
     </div>
   );
 };

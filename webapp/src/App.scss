@@ -1,12 +1,73 @@
 @import "~bootstrap/scss/bootstrap";
+@import "scss/animations";
+
 .App {
-    text-align: center;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
 }
 
 main {
-    margin-top: 4rem;
-    height: calc(100vh - 4rem - 7rem);
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  min-height: 500px;
+
+  flex: 1;
+  align-self: center;
+
+  .control-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+    overflow: hidden;
+
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+
+    &-enter {
+      height: 0%;
+    }
+
+    &-enter-active {
+      height: 100%;
+      transition: all $speed ease;
+    }
+
+    &-exit {
+      height: 100%;
+    }
+
+    &-exit-active {
+      height: 0%;
+      transition: all $speed ease;
+    }
+  }
+
+  .table-container {
+    height: 100%;
+    overflow: auto;
+  }
+}
+
+.progress-container-enter {
+  height: 0rem;
+}
+.progress-container-enter-active {
+  height: 1.5rem;
+  transition: all $speed ease;
+}
+
+.progress-container-exit {
+  height: 1.5rem;
+}
+.progress-container-exit-active {
+  height: 0rem;
+  transition: all $speed ease;
 }

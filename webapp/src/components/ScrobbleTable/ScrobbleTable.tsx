@@ -30,16 +30,14 @@ const ScrobbleTable: React.FC<Props> = ({ scrobbles }) => {
   ));
 
   return (
-    <div className="table-container">
-      <div className="table">
-        <div className="table-header">
-          <div className="table-cell cover"></div>
-          <div className="table-cell song">Song</div>
-          <div className="table-cell album">Album</div>
-          <div className="table-cell artist">Artist</div>
-        </div>
-        {scrobbleTable}
+    <div className="table">
+      <div className="table-header">
+        <div className="table-cell cover"></div>
+        <div className="table-cell song">Song</div>
+        <div className="table-cell album">Album</div>
+        <div className="table-cell artist">Artist</div>
       </div>
+      {scrobbleTable}
     </div>
   );
 };
