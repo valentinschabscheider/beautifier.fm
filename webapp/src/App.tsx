@@ -24,6 +24,8 @@ import Colors from "./scss/_colors.module.scss";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { useWindowDimensions } from "./components/utils";
+
 library.add(fas);
 
 const App: React.FC = () => {
@@ -44,8 +46,10 @@ const App: React.FC = () => {
     setShowControlsButton(true);
   };
 
+  const { height } = useWindowDimensions();
+
   return (
-    <div className="App">
+    <div className="App" style={{ height: height }}>
       <Header>
         {showControlsButton && (
           <Button
