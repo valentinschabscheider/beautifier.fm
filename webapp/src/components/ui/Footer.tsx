@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import BuyMeACoffeeButton from "./BuyMeACoffeeButton";
 
@@ -23,30 +23,45 @@ const Footer: React.FC = () => {
     );
   };
 
+  const [visible, setVisible] = useState<boolean>(true);
+
   return (
     <footer>
-      <div className="column">
-        <h6>Like our page? support us</h6>
-        <BuyMeACoffeeButton user="valischabi" />
-      </div>
-      <div className="column">
-        <div>
-          <h6>Creator's last.fm accounts</h6>
-          <ul>
-            <li>
-              <LastFMUser user={"Pantera97"} />
-            </li>
-            <li>
-              <LastFMUser user={"mrvalstar"} />
-            </li>
-          </ul>
+      <button
+        id="footer-toggle"
+        onClick={(e) => {
+          e.preventDefault();
+          setVisible(!visible);
+        }}
+      >
+        {visible ? "▼" : "▲"}
+      </button>
+      {visible && (
+        <div className="elements-container">
+          <div className="column">
+            <h6>Like our page? support us</h6>
+            <BuyMeACoffeeButton user="valischabi" />
+          </div>
+          <div className="column">
+            <div>
+              <h6>Creator's last.fm accounts</h6>
+              <ul>
+                <li>
+                  <LastFMUser user={"Pantera97"} />
+                </li>
+                <li>
+                  <LastFMUser user={"mrvalstar"} />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="column">
+            <h6>
+              © 2020 Copyright <a href="https://daval.dev">DAVAL</a>
+            </h6>
+          </div>
         </div>
-      </div>
-      <div className="column">
-        <h6>
-          © 2020 Copyright <a href="https://daval.dev">DAVAL</a>
-        </h6>
-      </div>
+      )}
     </footer>
   );
 };
