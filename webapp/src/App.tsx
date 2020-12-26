@@ -17,6 +17,13 @@ import CookieConsent from "./components/ui/CookieConsent";
 
 import { CSSTransition } from "react-transition-group";
 
+import GridLoader from "react-spinners/GridLoader";
+import { css } from "@emotion/core";
+import Colors from "./scss/_colors.module.scss";
+
+import { Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 library.add(fas);
 
 const App: React.FC = () => {
@@ -26,6 +33,10 @@ const App: React.FC = () => {
 
   const [showControls, setShowControls] = useState(true);
   const [showControlsButton, setShowControlsButton] = useState(false);
+
+  const gridLoaderCss = css`
+    margin: 10rem auto;
+  `;
 
   const goOrsmth: Function = (u: string) => {
     fetchScrobbles(u, setProgress, setScrobbles);
@@ -37,14 +48,17 @@ const App: React.FC = () => {
     <div className="App">
       <Header>
         {showControlsButton && (
-          <button
+          <Button
+            id="showControl"
+            variant="dark"
             onClick={(e) => {
               e.preventDefault();
               setShowControls(!showControls);
             }}
+            style={{ position: "absolute", height: "100%" }}
           >
-            controls
-          </button>
+            <FontAwesomeIcon icon={["fas", "bars"]} />
+          </Button>
         )}
       </Header>
       <CSSTransition
@@ -68,7 +82,16 @@ const App: React.FC = () => {
         </CSSTransition>
 
         <div className="table-container">
-          <ScrobbleTable scrobbles={scrobbles} />
+          {progress < 100 ? (
+            <GridLoader
+              size={50}
+              color={Colors.dark}
+              loading={progress >= 0}
+              css={gridLoaderCss}
+            />
+          ) : (
+            <ScrobbleTable scrobbles={scrobbles} />
+          )}
         </div>
       </main>
       <Footer />
