@@ -19,7 +19,6 @@ import { CSSTransition } from "react-transition-group";
 
 import GridLoader from "react-spinners/GridLoader";
 import { css } from "@emotion/core";
-import Colors from "./scss/_colors.module.scss";
 
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,6 +26,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useWindowDimensions } from "./components/utils";
 
 import { duration as animationDuration } from "./models/Animation";
+import * as Colors from "./models/Colors";
 
 library.add(fas);
 
