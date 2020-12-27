@@ -35,7 +35,7 @@ main {
 
     &-enter-active {
       height: 100%;
-      transition: all $speed ease;
+      transition: all $duration ease;
     }
 
     &-exit {
@@ -44,7 +44,7 @@ main {
 
     &-exit-active {
       height: 0%;
-      transition: all $speed ease;
+      transition: all $duration ease;
     }
   }
 
@@ -59,7 +59,7 @@ main {
 }
 .progress-container-enter-active {
   height: 1.5rem;
-  transition: all $speed ease;
+  transition: all $duration ease;
 }
 
 .progress-container-exit {
@@ -67,5 +67,5 @@ main {
 }
 .progress-container-exit-active {
   height: 0rem;
-  transition: all $speed ease;
+  transition: all $duration ease;
 }

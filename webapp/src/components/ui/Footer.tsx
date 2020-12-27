@@ -4,6 +4,8 @@ import { CSSTransition } from "react-transition-group";
 
 import BuyMeACoffeeButton from "./BuyMeACoffeeButton";
 
+import { duration as animationDuration } from "../../models/Animation";
+
 import "./Footer.scss";
 
 interface FooterProps {
@@ -41,7 +43,7 @@ const Footer: React.FC<FooterProps> = ({
   return (
     <CSSTransition
       in={visible}
-      timeout={200}
+      timeout={animationDuration}
       classNames="footer-collapse"
       onEnter={() => {
         setCollapsing(true);

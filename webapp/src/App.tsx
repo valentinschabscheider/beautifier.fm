@@ -26,6 +26,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useWindowDimensions } from "./components/utils";
 
+import { duration as animationDuration } from "./models/Animation";
+
 library.add(fas);
 
 const App: React.FC = () => {
@@ -73,7 +75,7 @@ const App: React.FC = () => {
       <CSSTransition
         in={progress >= 0 && progress < 100}
         unmountOnExit
-        timeout={500}
+        timeout={animationDuration}
         classNames="progress-container"
       >
         <ProgressBar value={Math.round(progress)} />
@@ -82,7 +84,7 @@ const App: React.FC = () => {
         <CSSTransition
           in={showControls}
           unmountOnExit
-          timeout={500}
+          timeout={animationDuration}
           classNames="control-container"
         >
           <div className="control-container">

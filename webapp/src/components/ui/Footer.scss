@@ -70,7 +70,7 @@ footer {
 
   &-enter-active {
     transform: translateY(0%);
-    transition: all $speed ease;
+    transition: all $duration ease;
   }
 
   &-exit {
@@ -79,6 +79,6 @@ footer {
 
   &-exit-active {
     transform: translateY(100%);
-    transition: all $speed ease;
+    transition: all $duration ease;
   }
 }
