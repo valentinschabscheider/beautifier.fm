@@ -36,6 +36,8 @@ const App: React.FC = () => {
   const [showControls, setShowControls] = useState(true);
   const [showControlsButton, setShowControlsButton] = useState(false);
 
+  const [footerCollapsing, setFooterCollapsing] = useState<boolean>(false);
+
   const gridLoaderCss = css`
     margin: 10rem auto;
   `;
@@ -49,7 +51,10 @@ const App: React.FC = () => {
   const { height } = useWindowDimensions();
 
   return (
-    <div className="App" style={{ height: height }}>
+    <div
+      className="App"
+      style={{ height: height, overflow: footerCollapsing ? "hidden" : "auto" }}
+    >
       <Header>
         {showControlsButton && (
           <Button
@@ -98,7 +103,10 @@ const App: React.FC = () => {
           )}
         </div>
       </main>
-      <Footer />
+      <Footer
+        onCollapse={() => setFooterCollapsing(true)}
+        onCollapseFinished={() => setFooterCollapsing(false)}
+      />
       <CookieConsent />
     </div>
   );

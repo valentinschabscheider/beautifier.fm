@@ -40,7 +40,11 @@ footer {
     color: white;
     border: none;
     border-top-right-radius: 0.25rem;
-    line-height: 2rem;
+    font-size: 1.3rem;
+
+    &:focus {
+      outline: 0;
+    }
   }
 
   a {
@@ -56,5 +60,25 @@ footer {
   .buymeacoffee-button img {
     width: 100%;
     max-width: 12rem;
+  }
+}
+
+.footer-collapse {
+  &-enter {
+    transform: translateY(100%);
+  }
+
+  &-enter-active {
+    transform: translateY(0%);
+    transition: all $speed ease;
+  }
+
+  &-exit {
+    transform: translateY(0%);
+  }
+
+  &-exit-active {
+    transform: translateY(100%);
+    transition: all $speed ease;
   }
 }
