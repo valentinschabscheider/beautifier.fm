@@ -1,61 +1,61 @@
 @import "../../scss/colors";
 
 .table {
-  display: table;
-  width: 100%;
-  border-collapse: collapse;
-  overflow-wrap: anywhere;
+	display: table;
+	width: 100%;
+	border-collapse: collapse;
+	overflow-wrap: anywhere;
 }
 
 .table-header {
-  display: table-header-group;
+	display: table-header-group;
 }
 
 .table-header .table-cell {
-  position: sticky;
-  top: 0;
-  background-color: $color-dark;
-  color: #fff;
+	position: sticky;
+	top: 0;
+	background-color: $color-dark;
+	color: #fff;
 }
 
 .table-row {
-  display: table-row;
-  border-bottom: 1px solid #dee2e6;
-  text-decoration: none;
-  color: #000;
+	display: table-row;
+	border-bottom: 1px solid #dee2e6;
+	text-decoration: none;
+	color: #000;
 }
 
 .table-row:hover {
-  background-color: #888;
-  color: #fff;
+	background-color: #888;
+	color: #fff;
 }
 .table-cell {
-  display: table-cell;
-  vertical-align: middle;
-  height: 3rem;
-  text-align: left;
-  text-overflow: ellipsis;
-  padding: 0 0.5rem 0 0;
+	display: table-cell;
+	vertical-align: middle;
+	height: 3rem;
+	text-align: left;
+	text-overflow: ellipsis;
+	padding: 0 0.5rem 0 0;
 }
 
 .table-row .cover {
-  max-height: 100%;
-  width: 5%;
-  padding: 0;
+	max-height: 100%;
+	width: 5%;
+	padding: 0;
 }
 .table-row .cover img {
-  display: block;
-  margin: auto;
+	display: block;
+	margin: auto;
 }
 
 .table-row .song {
-  width: 45%;
+	width: 45%;
 }
 
 .table-row .album {
-  width: 25%;
+	width: 25%;
 }
 
 .table-row .artist {
-  width: 25%;
+	width: 25%;
 }

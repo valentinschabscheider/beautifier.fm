@@ -2,83 +2,83 @@
 @import "scss/animations";
 
 footer {
-  position: relative;
+	position: relative;
 
-  .elements-container {
-    display: flex !important;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
+	.elements-container {
+		display: flex !important;
+		flex-direction: row;
+		justify-content: space-evenly;
+		align-items: center;
 
-    text-align: center;
+		text-align: center;
 
-    background-color: $color-dark;
-    color: #fff;
+		background-color: $color-dark;
+		color: #fff;
 
-    .column {
-      flex-basis: 100%;
-      padding: 0.5rem;
+		.column {
+			flex-basis: 100%;
+			padding: 0.5rem;
 
-      ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-    }
-  }
+			ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+		}
+	}
 
-  #footer-toggle {
-    position: absolute;
-    transform: translate(-50%, -100%);
-    left: 50%;
-    z-index: 1;
-    height: 2rem;
+	#footer-toggle {
+		position: absolute;
+		transform: translate(-50%, -100%);
+		left: 50%;
+		z-index: 1;
+		height: 2rem;
 
-    border-top-left-radius: 0.25rem;
-    width: 5rem;
-    background-color: #343a40;
-    color: white;
-    border: none;
-    border-top-right-radius: 0.25rem;
-    font-size: 1.3rem;
+		border-top-left-radius: 0.25rem;
+		width: 5rem;
+		background-color: #343a40;
+		color: white;
+		border: none;
+		border-top-right-radius: 0.25rem;
+		font-size: 1.3rem;
 
-    &:focus {
-      outline: 0;
-    }
-  }
+		&:focus {
+			outline: 0;
+		}
+	}
 
-  a {
-    text-decoration: none;
-    color: #fff;
+	a {
+		text-decoration: none;
+		color: #fff;
 
-    &:hover {
-      text-decoration: none;
-      color: $color-red;
-    }
-  }
+		&:hover {
+			text-decoration: none;
+			color: $color-red;
+		}
+	}
 
-  .buymeacoffee-button img {
-    width: 100%;
-    max-width: 12rem;
-  }
+	.buymeacoffee-button img {
+		width: 100%;
+		max-width: 12rem;
+	}
 }
 
 .footer-collapse {
-  &-enter {
-    transform: translateY(100%);
-  }
+	&-enter {
+		transform: translateY(100%);
+	}
 
-  &-enter-active {
-    transform: translateY(0%);
-    transition: all $duration ease;
-  }
+	&-enter-active {
+		transform: translateY(0%);
+		transition: all $duration ease;
+	}
 
-  &-exit {
-    transform: translateY(0%);
-  }
+	&-exit {
+		transform: translateY(0%);
+	}
 
-  &-exit-active {
-    transform: translateY(100%);
-    transition: all $duration ease;
-  }
+	&-exit-active {
+		transform: translateY(100%);
+		transition: all $duration ease;
+	}
 }

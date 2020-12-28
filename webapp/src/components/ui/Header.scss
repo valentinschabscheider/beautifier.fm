@@ -2,20 +2,20 @@
 @import "scss/keyframes";
 
 header {
-  position: relative;
+	position: relative;
 
-  min-height: 4rem;
+	min-height: 4rem;
 
-  text-align: center;
+	text-align: center;
 
-  background-color: $color-dark;
+	background-color: $color-dark;
 
-  .logo {
-    max-height: 100%;
-    padding: 0.5rem;
+	.logo {
+		max-height: 100%;
+		padding: 0.5rem;
 
-    &:hover {
-      animation: color-rotate 3s linear 0s infinite none;
-    }
-  }
+		&:hover {
+			animation: color-rotate 3s linear 0s infinite none;
+		}
+	}
 }

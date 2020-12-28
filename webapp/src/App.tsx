@@ -31,87 +31,87 @@ import * as Colors from "./models/Colors";
 library.add(fas);
 
 const App: React.FC = () => {
-  //const [userName, setUserName] = useState<string>("");
-  const [progress, setProgress] = useState<number>(-1);
-  const [scrobbles, setScrobbles] = useState<Array<Scrobble>>([]);
+	//const [userName, setUserName] = useState<string>("");
+	const [progress, setProgress] = useState<number>(-1);
+	const [scrobbles, setScrobbles] = useState<Array<Scrobble>>([]);
 
-  const [showControls, setShowControls] = useState(true);
-  const [showControlsButton, setShowControlsButton] = useState(false);
+	const [showControls, setShowControls] = useState(true);
+	const [showControlsButton, setShowControlsButton] = useState(false);
 
-  const [footerCollapsing, setFooterCollapsing] = useState<boolean>(false);
+	const [footerCollapsing, setFooterCollapsing] = useState<boolean>(false);
 
-  const gridLoaderCss = css`
-    margin: 10rem auto;
-  `;
+	const gridLoaderCss = css`
+		margin: 10rem auto;
+	`;
 
-  const goOrsmth: Function = (u: string) => {
-    fetchScrobbles(u, setProgress, setScrobbles);
-    setShowControls(false);
-    setShowControlsButton(true);
-  };
+	const goOrsmth: Function = (u: string) => {
+		fetchScrobbles(u, setProgress, setScrobbles);
+		setShowControls(false);
+		setShowControlsButton(true);
+	};
 
-  const { height } = useWindowDimensions();
+	const { height } = useWindowDimensions();
 
-  return (
-    <div
-      className="App"
-      style={{ height: height, overflow: footerCollapsing ? "hidden" : "auto" }}
-    >
-      <Header>
-        {showControlsButton && (
-          <Button
-            id="showControl"
-            variant="dark"
-            onClick={(e) => {
-              e.preventDefault();
-              setShowControls(!showControls);
-            }}
-            style={{ position: "absolute", height: "100%" }}
-          >
-            <FontAwesomeIcon icon={["fas", "bars"]} />
-          </Button>
-        )}
-      </Header>
-      <CSSTransition
-        in={progress >= 0 && progress < 100}
-        unmountOnExit
-        timeout={animationDuration}
-        classNames="progress-container"
-      >
-        <ProgressBar value={Math.round(progress)} />
-      </CSSTransition>
-      <main>
-        <CSSTransition
-          in={showControls}
-          unmountOnExit
-          timeout={animationDuration}
-          classNames="control-container"
-        >
-          <div className="control-container">
-            <Controls startProcess={goOrsmth} />
-          </div>
-        </CSSTransition>
+	return (
+		<div
+			className="App"
+			style={{ height: height, overflow: footerCollapsing ? "hidden" : "auto" }}
+		>
+			<Header>
+				{showControlsButton && (
+					<Button
+						id="showControl"
+						variant="dark"
+						onClick={(e) => {
+							e.preventDefault();
+							setShowControls(!showControls);
+						}}
+						style={{ position: "absolute", height: "100%" }}
+					>
+						<FontAwesomeIcon icon={["fas", "bars"]} />
+					</Button>
+				)}
+			</Header>
+			<CSSTransition
+				in={progress >= 0 && progress < 100}
+				unmountOnExit
+				timeout={animationDuration}
+				classNames="progress-container"
+			>
+				<ProgressBar value={Math.round(progress)} />
+			</CSSTransition>
+			<main>
+				<CSSTransition
+					in={showControls}
+					unmountOnExit
+					timeout={animationDuration}
+					classNames="control-container"
+				>
+					<div className="control-container">
+						<Controls startProcess={goOrsmth} />
+					</div>
+				</CSSTransition>
 
-        <div className="table-container">
-          {progress < 100 ? (
-            <GridLoader
-              size={50}
-              color={Colors.dark}
-              loading={progress >= 0}
-              css={gridLoaderCss}
-            />
-          ) : (
-            <ScrobbleTable scrobbles={scrobbles} />
-          )}
-        </div>
-      </main>
-      <Footer
-        onCollapse={() => setFooterCollapsing(true)}
-        onCollapseFinished={() => setFooterCollapsing(false)}
-      />
-      <CookieConsent />
-    </div>
-  );
+				<div className="table-container">
+					{progress < 100 ? (
+						<GridLoader
+							size={50}
+							color={Colors.dark}
+							loading={progress >= 0}
+							css={gridLoaderCss}
+						/>
+					) : (
+						<ScrobbleTable scrobbles={scrobbles} />
+					)}
+				</div>
+			</main>
+			<Footer
+				onCollapse={() => setFooterCollapsing(true)}
+				onCollapseFinished={() => setFooterCollapsing(false)}
+			/>
+			<CookieConsent />
+		</div>
+	);
 };
 
 export default App;
