@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"path": "../webapp/"
+		}
+	],
+	"settings": {
+		"editor.tabSize": 2,
+		"prettier.useTabs": true,
+		"editor.insertSpaces": false,
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"git.autofetch": true,
+		"typescript.updateImportsOnFileMove.enabled": "always",
+		"search.exclude": {
+			"**/package-lock.json": true
+		}
+	},
+	"extensions": {
+		"recommendations": [
+			"esbenp.prettier-vscode",
+			"syler.sass-indented",
+			"eamodio.gitlens"
+		]
+	}
+}
