@@ -1,4 +1,4 @@
-import React, { createRef, CSSProperties, useEffect, useRef } from "react";
+import React, { CSSProperties, useEffect, useRef } from "react";
 
 import { useWindowDimensions } from "../utils";
 import * as Measures from "../../models/Measures";
