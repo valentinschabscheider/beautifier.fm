@@ -1,4 +1,7 @@
+@import "scss/colors";
+
 @import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600&display=swap");
+
 html,
 body,
 #root {
@@ -8,4 +11,5 @@ body,
 
 body {
 	font-family: "Epilogue", sans-serif;
+	background-color: $color-dark;
 }

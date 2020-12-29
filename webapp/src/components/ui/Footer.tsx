@@ -10,15 +10,9 @@ import "./Footer.scss";
 
 interface FooterProps {
 	startVisible?: boolean;
-	onCollapse: Function;
-	onCollapseFinished: Function;
 }
 
-const Footer: React.FC<FooterProps> = ({
-	startVisible = true,
-	onCollapse,
-	onCollapseFinished,
-}) => {
+const Footer: React.FC<FooterProps> = ({ startVisible = true }) => {
 	//add ability to minimize footer or make scrobble table full screen
 
 	const [visible, setVisible] = useState<boolean>(startVisible);
@@ -47,19 +41,15 @@ const Footer: React.FC<FooterProps> = ({
 			classNames="footer-collapse"
 			onEnter={() => {
 				setCollapsing(true);
-				onCollapse();
 			}}
 			onEntered={() => {
 				setCollapsing(false);
-				onCollapseFinished();
 			}}
 			onExit={() => {
 				setCollapsing(true);
-				onCollapse();
 			}}
 			onExited={() => {
 				setCollapsing(false);
-				onCollapseFinished();
 			}}
 		>
 			<footer>

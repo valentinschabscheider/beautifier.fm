@@ -1,18 +1,21 @@
 @import "~bootstrap/scss/bootstrap";
 @import "scss/animations";
+@import "scss/measures.scss";
 
 .App {
 	display: flex;
 	flex-direction: column;
+	min-height: $app-min-height;
+	background-color: white;
 }
 
 main {
 	position: relative;
 	width: 100%;
-	max-width: 960px;
-	min-height: 400px;
+	max-width: 1920px;
+	overflow-y: auto;
 
-	flex: 1;
+	flex-grow: 1;
 	align-self: center;
 
 	.control-container {
