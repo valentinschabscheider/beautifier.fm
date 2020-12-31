@@ -4,7 +4,7 @@ import Header from "./components/ui/Header";
 import Footer from "./components/ui/Footer";
 import ProgressBar from "./components/ui/ProgressBar";
 import Controls from "./components/ui/Controls";
-import ScrobbleTable from "./components/ScrobbleTable/ScrobbleTable";
+import MaterialTableOwn from "./components/ui/MaterialTable";
 
 import "./App.scss";
 
@@ -101,7 +101,7 @@ const App: React.FC = () => {
 							css={gridLoaderCss}
 						/>
 					) : (
-						<ScrobbleTable scrobbles={scrobbles} />
+						<MaterialTableOwn scrobbles={scrobbles} />
 					)}
 				</div>
 			</main>
