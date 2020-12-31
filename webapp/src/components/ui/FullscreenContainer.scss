@@ -1,0 +1,10 @@
+@import "../../scss/mixins.scss";
+@import "../../scss/animations.scss";
+
+.FullscreenContainer {
+	transition: all $duration ease;
+}
+
+.scrollbar-hidden {
+	@include hideScrollbar;
+}
