@@ -23,10 +23,10 @@ import { css } from "@emotion/core";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { useWindowDimensions } from "./components/utils";
-
 import { duration as animationDuration } from "./models/Animation";
 import * as Colors from "./models/Colors";
+
+import FullscreenContainer from "./components/ui/FullscreenContainer";
 
 library.add(fas);
 
@@ -38,8 +38,6 @@ const App: React.FC = () => {
 	const [showControls, setShowControls] = useState(true);
 	const [showControlsButton, setShowControlsButton] = useState(false);
 
-	const [footerCollapsing, setFooterCollapsing] = useState<boolean>(false);
-
 	const gridLoaderCss = css`
 		margin: 10rem auto;
 	`;
@@ -50,13 +48,8 @@ const App: React.FC = () => {
 		setShowControlsButton(true);
 	};
 
-	const { height } = useWindowDimensions();
-
 	return (
-		<div
-			className="App"
-			style={{ height: height, overflow: footerCollapsing ? "hidden" : "auto" }}
-		>
+		<FullscreenContainer className="App">
 			<Header>
 				{showControlsButton && (
 					<Button
@@ -105,12 +98,9 @@ const App: React.FC = () => {
 					)}
 				</div>
 			</main>
-			<Footer
-				onCollapse={() => setFooterCollapsing(true)}
-				onCollapseFinished={() => setFooterCollapsing(false)}
-			/>
+			<Footer />
 			<CookieConsent />
-		</div>
+		</FullscreenContainer>
 	);
 };
 

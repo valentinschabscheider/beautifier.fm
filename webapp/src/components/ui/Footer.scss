@@ -1,8 +1,10 @@
 @import "scss/colors";
 @import "scss/animations";
+@import "scss/measures";
 
 footer {
 	position: relative;
+	max-height: $footer-max-height;
 
 	.elements-container {
 		display: flex !important;
@@ -65,20 +67,16 @@ footer {
 
 .footer-collapse {
 	&-enter {
-		transform: translateY(100%);
+		max-height: 0%;
 	}
 
 	&-enter-active {
-		transform: translateY(0%);
-		transition: all $duration ease;
-	}
-
-	&-exit {
-		transform: translateY(0%);
+		max-height: $footer-max-height;
+		transition: max-height $duration ease;
 	}
 
 	&-exit-active {
-		transform: translateY(100%);
-		transition: all $duration ease;
+		max-height: 0%;
+		transition: max-height $duration ease;
 	}
 }

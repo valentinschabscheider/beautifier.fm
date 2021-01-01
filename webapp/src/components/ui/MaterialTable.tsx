@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import MaterialTable from "material-table";
 import { Paper } from "@material-ui/core";
-import fetchScrobbles, { Scrobble } from "../lastfm";
+import { Scrobble } from "../lastfm";
 
 interface Props {
 	scrobbles: Array<Scrobble>;
@@ -16,7 +16,7 @@ const MaterialTableOwn: React.FC<Props> = ({ scrobbles }) => {
 					title: "",
 					field: "image",
 					cellStyle: { width: "2%" },
-					render: (rowData) => <img src={rowData.image} />,
+					render: (rowData) => <img src={rowData.image} alt="" />,
 				},
 				{ title: "Artist", field: "artist", cellStyle: { width: "20%" } },
 				{ title: "Track", field: "song", cellStyle: { width: "50%" } },
