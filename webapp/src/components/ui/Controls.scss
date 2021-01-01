@@ -1,4 +1,4 @@
-@import "scss/colors";
+@use "scss/colors";
 
 #controls {
 	display: flex;
@@ -6,6 +6,6 @@
 }
 
 #username:focus {
-	border-color: $color-red;
-	box-shadow: 0 0 0 0.1rem rgba(232, 50, 0, 0.25);
+	border-color: colors.$accent;
+	box-shadow: 0 0 0 0.1rem rgba(colors.$accent, 0.25);
 }

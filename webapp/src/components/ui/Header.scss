@@ -1,5 +1,5 @@
-@import "scss/colors";
-@import "scss/keyframes";
+@use "scss/colors";
+@use "scss/animation";
 
 header {
 	position: relative;
@@ -8,7 +8,7 @@ header {
 
 	text-align: center;
 
-	background-color: $color-dark;
+	background-color: colors.$primary;
 
 	.logo {
 		max-height: 100%;

@@ -1,18 +1,18 @@
-@import "~bootstrap/scss/bootstrap";
-@import "scss/animations";
-@import "scss/measures.scss";
+@use "scss/animation";
+@use "scss/measures";
+@use "scss/colors";
 
 .App {
 	display: flex;
 	flex-direction: column;
-	min-height: $app-min-height;
-	background-color: white;
+	min-height: measures.$app-min-height;
+	background-color: colors.$background;
 }
 
 main {
 	position: relative;
 	width: 100%;
-	max-width: 1920px;
+	max-width: measures.$main-max-width;
 	min-height: 0;
 
 	flex-grow: 1;
@@ -30,7 +30,7 @@ main {
 		justify-content: center;
 		align-items: center;
 
-		background-color: white;
+		background-color: colors.$background;
 
 		&-enter {
 			height: 0%;
@@ -38,7 +38,7 @@ main {
 
 		&-enter-active {
 			height: 100%;
-			transition: all $duration ease;
+			transition: all animation.$duration ease;
 		}
 
 		&-exit {
@@ -47,7 +47,7 @@ main {
 
 		&-exit-active {
 			height: 0%;
-			transition: all $duration ease;
+			transition: all animation.$duration ease;
 		}
 	}
 
@@ -62,7 +62,7 @@ main {
 }
 .progress-container-enter-active {
 	height: 1.5rem;
-	transition: all $duration ease;
+	transition: all animation.$duration ease;
 }
 
 .progress-container-exit {
@@ -70,5 +70,5 @@ main {
 }
 .progress-container-exit-active {
 	height: 0rem;
-	transition: all $duration ease;
+	transition: all animation.$duration ease;
 }

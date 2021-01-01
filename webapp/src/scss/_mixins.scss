@@ -1,4 +1,4 @@
-@mixin hideScrollbar {
+@mixin hide-scrollbar {
 	// https://blogs.msdn.microsoft.com/kurlak/2013/11/03/hiding-vertical-scrollbars-with-pure-css-in-chrome-ie-6-firefox-opera-and-safari/
 	// There is a CSS rule that can hide scrollbars in Webkit-based browsers (Chrome and Safari).
 	&::-webkit-scrollbar {

@@ -1,5 +1,8 @@
-@import "./measures";
+@use "./measures";
 
 :export {
-	appMinHeight: $app-min-height;
+	headerHeight: measures.$header-height;
+	footerMaxHeight: measures.$footer-max-height;
+	appMinHeight: measures.$app-min-height;
+	mainMaxWidth: measures.$main-max-width;
 }

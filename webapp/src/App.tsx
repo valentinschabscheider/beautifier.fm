@@ -89,7 +89,7 @@ const App: React.FC = () => {
 					{progress < 100 ? (
 						<GridLoader
 							size={50}
-							color={Colors.dark}
+							color={Colors.primary}
 							loading={progress >= 0}
 							css={gridLoaderCss}
 						/>

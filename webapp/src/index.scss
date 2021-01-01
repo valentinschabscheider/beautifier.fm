@@ -1,6 +1,7 @@
-@import "scss/colors";
+@use "~bootstrap/scss/bootstrap";
 
-@import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600&display=swap");
+@use "scss/colors";
+@use "scss/fonts";
 
 html,
 body,
@@ -10,6 +11,6 @@ body,
 }
 
 body {
-	font-family: "Epilogue", sans-serif;
-	background-color: $color-dark;
+	font-family: fonts.$primary;
+	background-color: colors.$primary;
 }

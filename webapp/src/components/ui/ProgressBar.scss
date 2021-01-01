@@ -1,11 +1,13 @@
+@use "scss/colors";
+
 .progress-container {
 	height: 1.5rem;
 	width: 100%;
-	background-color: #f1f1f1;
+	background-color: colors.$secondary;
 }
 
 .progress-container .progress-bar {
-	color: #fff;
-	background-color: #4caf50;
+	color: colors.$primary-font;
+	background-color: colors.$accent;
 	transition: width 4s;
 }

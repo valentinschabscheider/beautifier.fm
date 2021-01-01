@@ -1,10 +1,10 @@
-@import "scss/colors";
-@import "scss/animations";
-@import "scss/measures";
+@use "scss/colors";
+@use "scss/animation";
+@use "scss/measures";
 
 footer {
 	position: relative;
-	max-height: $footer-max-height;
+	max-height: measures.$footer-max-height;
 
 	.elements-container {
 		display: flex !important;
@@ -14,8 +14,8 @@ footer {
 
 		text-align: center;
 
-		background-color: $color-dark;
-		color: #fff;
+		background-color: colors.$primary;
+		color: colors.$primary-font;
 
 		.column {
 			flex-basis: 100%;
@@ -38,8 +38,8 @@ footer {
 
 		border-top-left-radius: 0.25rem;
 		width: 5rem;
-		background-color: #343a40;
-		color: white;
+		background-color: colors.$primary;
+		color: colors.$primary-font;
 		border: none;
 		border-top-right-radius: 0.25rem;
 		font-size: 1.3rem;
@@ -51,11 +51,11 @@ footer {
 
 	a {
 		text-decoration: none;
-		color: #fff;
+		color: colors.$primary-font;
 
 		&:hover {
 			text-decoration: none;
-			color: $color-red;
+			color: colors.$accent;
 		}
 	}
 
@@ -71,12 +71,12 @@ footer {
 	}
 
 	&-enter-active {
-		max-height: $footer-max-height;
-		transition: max-height $duration ease;
+		max-height: measures.$footer-max-height;
+		transition: max-height animation.$duration ease;
 	}
 
 	&-exit-active {
 		max-height: 0%;
-		transition: max-height $duration ease;
+		transition: max-height animation.$duration ease;
 	}
 }

@@ -1,3 +1,5 @@
+$duration: 200ms; //must be in milliseconds
+
 @keyframes color-rotate {
 	from {
 		filter: hue-rotate(0deg);

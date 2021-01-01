@@ -1,6 +1,9 @@
-@import "./colors";
+@use "./colors";
 
 :export {
-	dark: $color-dark;
-	red: $color-red;
+	primary: colors.$primary;
+	primaryFont: colors.$primary-font;
+	secondary: colors.$secondary;
+	background: colors.$background;
+	accent: colors.$accent;
 }
