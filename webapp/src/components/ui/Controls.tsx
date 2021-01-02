@@ -46,7 +46,7 @@ const Controls: React.FC<ControlsProps> = ({ startProcess }) => {
 		localStorage.setItem("userName", text);
 		startProcess(text, {
 			from: dateRange.startDate,
-			to: dateRange.endDate,
+			to: addDays(dateRange.endDate, 1),
 		} as DateRange);
 	};
 
@@ -81,6 +81,7 @@ const Controls: React.FC<ControlsProps> = ({ startProcess }) => {
 						ranges={[dateRange]}
 						rangeColors={[Colors.accent]}
 						inputRanges={[]}
+						weekStartsOn={1}
 					/>
 				</Form.Group>
 			</Form>
