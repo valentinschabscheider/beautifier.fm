@@ -19,3 +19,11 @@ header {
 		}
 	}
 }
+
+#showControl {
+	height: 100% !important;
+
+	&:focus {
+		outline: 0 !important;
+	}
+}

@@ -18,7 +18,9 @@ interface ProcessedResponse {
 const fetchScrobbles = async (
 	userName: string,
 	setProgress: Function,
-	setScrobbles: Function
+	addScrobbles: Function,
+	deleteScrobbles: Function,
+	finishededFetching: Function
 ) => {
 	const lastfm = new LastFMTyped(
 		String(process.env.REACT_APP_LASTFM_API_KEY),
@@ -29,9 +31,6 @@ const fetchScrobbles = async (
 
 	let totalPages: number = 0;
 	const unfetchedPages: Array<number> = [1];
-	const allScrobbles: Array<Scrobble> = [];
-
-	setProgress(0);
 
 	const handleProgress = (page: number) => {
 		unfetchedPages.splice(unfetchedPages.indexOf(page), 1);
@@ -84,7 +83,8 @@ const fetchScrobbles = async (
 
 	fetchPage(1).then((result) => {
 		let { attr, scrobbles } = result;
-		allScrobbles.push(...scrobbles);
+		deleteScrobbles();
+		addScrobbles(scrobbles);
 		totalPages = Number(attr.totalPages);
 		unfetchedPages.push(...Array.from({ length: totalPages }, (v, k) => k + 2));
 
@@ -98,11 +98,10 @@ const fetchScrobbles = async (
 						console.log(result);
 					}
 					if (result.status === "fulfilled" && result.value) {
-						allScrobbles.push(...result.value.scrobbles);
+						addScrobbles(result.value.scrobbles);
 					}
 				});
-				setScrobbles(allScrobbles);
-				setProgress(100);
+				finishededFetching();
 			}
 		);
 	});

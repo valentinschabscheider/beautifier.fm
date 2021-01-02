@@ -4,7 +4,7 @@ import Header from "./components/ui/Header";
 import Footer from "./components/ui/Footer";
 import ProgressBar from "./components/ui/ProgressBar";
 import Controls from "./components/ui/Controls";
-import MaterialTableOwn from "./components/ui/MaterialTable";
+import ScrobbleTable from "./components/ui/ScrobbleTable";
 
 import "./App.scss";
 
@@ -12,67 +12,46 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
 import fetchScrobbles from "./components/lastfm";
-import { Scrobble } from "./components/lastfm";
 import CookieConsent from "./components/ui/CookieConsent";
 
 import { CSSTransition } from "react-transition-group";
 
-import GridLoader from "react-spinners/GridLoader";
-import { css } from "@emotion/core";
-
-import { Button } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { duration as animationDuration } from "./models/Animation";
-import * as Colors from "./models/Colors";
 
 import FullscreenContainer from "./components/ui/FullscreenContainer";
+
+import useStore from "./store";
 
 library.add(fas);
 
 const App: React.FC = () => {
-	//const [userName, setUserName] = useState<string>("");
-	const [progress, setProgress] = useState<number>(-1);
-	const [scrobbles, setScrobbles] = useState<Array<Scrobble>>([]);
-
 	const [showControls, setShowControls] = useState(true);
-	const [showControlsButton, setShowControlsButton] = useState(false);
 
-	const gridLoaderCss = css`
-		margin: 10rem auto;
-	`;
+	const setProgress = useStore((state) => state.setProgress);
+
+	const startedFetching = useStore((state) => state.startedFetching);
+	const finishededFetching = useStore((state) => state.finishededFetching);
+	const addScrobbles = useStore((state) => state.addScrobbles);
+	const deleteScrobbles = useStore((state) => state.deleteScrobbles);
 
 	const goOrsmth: Function = (u: string) => {
-		fetchScrobbles(u, setProgress, setScrobbles);
+		fetchScrobbles(
+			u,
+			setProgress,
+			addScrobbles,
+			deleteScrobbles,
+			finishededFetching
+		);
 		setShowControls(false);
-		setShowControlsButton(true);
+		startedFetching();
 	};
 
 	return (
 		<FullscreenContainer className="App">
-			<Header>
-				{showControlsButton && (
-					<Button
-						id="showControl"
-						variant="dark"
-						onClick={(e) => {
-							e.preventDefault();
-							setShowControls(!showControls);
-						}}
-						style={{ position: "absolute", height: "100%" }}
-					>
-						<FontAwesomeIcon icon={["fas", "bars"]} />
-					</Button>
-				)}
-			</Header>
-			<CSSTransition
-				in={progress >= 0 && progress < 100}
-				unmountOnExit
-				timeout={animationDuration}
-				classNames="progress-container"
-			>
-				<ProgressBar value={Math.round(progress)} />
-			</CSSTransition>
+			<Header
+				toggleControls={() => setShowControls((showControls) => !showControls)}
+			/>
+			<ProgressBar />
 			<main>
 				<CSSTransition
 					in={showControls}
@@ -86,16 +65,7 @@ const App: React.FC = () => {
 				</CSSTransition>
 
 				<div className="table-container">
-					{progress < 100 ? (
-						<GridLoader
-							size={50}
-							color={Colors.primary}
-							loading={progress >= 0}
-							css={gridLoaderCss}
-						/>
-					) : (
-						<MaterialTableOwn scrobbles={scrobbles} />
-					)}
+					<ScrobbleTable />
 				</div>
 			</main>
 			<Footer />

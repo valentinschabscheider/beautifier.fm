@@ -6,12 +6,16 @@ import { Button } from "react-bootstrap";
 import { InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import useStore from "../../store";
+
 interface Props {
 	startProcess: Function;
 }
 
 const Controls: React.FC<Props> = ({ startProcess }) => {
 	//add datepicker with range
+
+	const isFetching = useStore((state) => state.isFetching);
 
 	const [text, setText] = useState<string>(
 		localStorage.getItem("userName") !== null
@@ -40,7 +44,12 @@ const Controls: React.FC<Props> = ({ startProcess }) => {
 							onChange={(e) => setText(e.target.value)}
 						/>
 						<InputGroup.Append>
-							<Button id="go" variant="dark" onClick={(e) => onSubmit(e)}>
+							<Button
+								id="go"
+								variant="dark"
+								onClick={(e) => onSubmit(e)}
+								disabled={isFetching}
+							>
 								<FontAwesomeIcon icon={["fas", "search"]} />
 							</Button>
 						</InputGroup.Append>

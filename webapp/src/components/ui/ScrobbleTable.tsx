@@ -2,13 +2,14 @@ import React from "react";
 
 import MaterialTable from "material-table";
 import { Paper } from "@material-ui/core";
-import { Scrobble } from "../lastfm";
 
-interface Props {
-	scrobbles: Array<Scrobble>;
-}
+import useStore from "../../store";
 
-const MaterialTableOwn: React.FC<Props> = ({ scrobbles }) => {
+const ScrobbleTable: React.FC = () => {
+	const isLoading = useStore((state) => state.isFetching);
+
+	const scrobbles = useStore((state) => state.scrobbles);
+
 	return (
 		<MaterialTable
 			columns={[
@@ -32,8 +33,9 @@ const MaterialTableOwn: React.FC<Props> = ({ scrobbles }) => {
 				searchFieldAlignment: "left",
 			}}
 			components={{ Container: (props) => <Paper {...props} elevation={0} /> }}
+			isLoading={isLoading && scrobbles.length === 0}
 		/>
 	);
 };
 
-export default MaterialTableOwn;
+export default ScrobbleTable;
