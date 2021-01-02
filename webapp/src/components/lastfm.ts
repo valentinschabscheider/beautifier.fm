@@ -1,5 +1,7 @@
 import LastFMTyped from "lastfm-typed";
 import { getRecentTracks } from "lastfm-typed/dist/interfaces/userInterface";
+import { DateRange } from "./ui/Controls";
+import { dateAsUnix } from "./utils";
 
 type RecentTrack = getRecentTracks["track"][0];
 
@@ -17,6 +19,7 @@ interface ProcessedResponse {
 
 const fetchScrobbles = async (
 	userName: string,
+	dateRange: DateRange,
 	setProgress: Function,
 	addScrobbles: Function,
 	deleteScrobbles: Function,
@@ -35,7 +38,9 @@ const fetchScrobbles = async (
 	const handleProgress = (page: number) => {
 		unfetchedPages.splice(unfetchedPages.indexOf(page), 1);
 		if (totalPages)
-			setProgress(((totalPages - unfetchedPages.length) / totalPages) * 100);
+			setProgress(
+				Math.round(((totalPages - unfetchedPages.length) / totalPages) * 100)
+			);
 	};
 
 	const mapResponseToScrobbles = (
@@ -60,12 +65,8 @@ const fetchScrobbles = async (
 					{
 						limit: Number(process.env.REACT_APP_LASTFM_API_PAGE_SIZE),
 						page: page,
-						...(process.env.NODE_ENV === "development"
-							? {
-									from: process.env.REACT_APP_LASTFM_API_FROM_TIME,
-									to: process.env.REACT_APP_LASTFM_API_TO_TIME,
-							  }
-							: {}),
+						from: dateAsUnix(dateRange.from),
+						to: dateAsUnix(dateRange.to),
 					}
 				);
 

@@ -24,3 +24,7 @@ export const useWindowDimensions: Function = () => {
 
 	return windowDimensions;
 };
+
+export const dateAsUnix: Function = (date: Date): number => {
+	return Math.floor(date.getTime() / 1000);
+};

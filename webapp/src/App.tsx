@@ -22,6 +22,8 @@ import FullscreenContainer from "./components/ui/FullscreenContainer";
 
 import useStore from "./store";
 
+import { DateRange } from "./components/ui/Controls";
+
 library.add(fas);
 
 const App: React.FC = () => {
@@ -34,9 +36,10 @@ const App: React.FC = () => {
 	const addScrobbles = useStore((state) => state.addScrobbles);
 	const deleteScrobbles = useStore((state) => state.deleteScrobbles);
 
-	const goOrsmth: Function = (u: string) => {
+	const goOrsmth: Function = (u: string, d: DateRange) => {
 		fetchScrobbles(
 			u,
+			d,
 			setProgress,
 			addScrobbles,
 			deleteScrobbles,
