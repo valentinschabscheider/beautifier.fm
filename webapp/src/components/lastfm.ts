@@ -65,8 +65,12 @@ const fetchScrobbles = async (
 					{
 						limit: Number(process.env.REACT_APP_LASTFM_API_PAGE_SIZE),
 						page: page,
-						from: dateAsUnix(dateRange.from),
-						to: dateAsUnix(dateRange.to),
+						from:
+							dateRange.from !== undefined
+								? dateAsUnix(dateRange.from)
+								: undefined,
+						to:
+							dateRange.to !== undefined ? dateAsUnix(dateRange.to) : undefined,
 					}
 				);
 

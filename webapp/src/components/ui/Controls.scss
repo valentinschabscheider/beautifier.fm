@@ -7,7 +7,7 @@
 	height: 100%;
 	max-width: 487px;
 	justify-content: center;
-	padding-top: 1rem;
+	padding: 1rem;
 
 	form {
 		width: 100%;
@@ -26,6 +26,15 @@
 	width: 100%;
 }
 
+.rdrDateRangePickerWrapper {
+	border: solid 1px #eff2f7;
+	border-radius: 0.25rem;
+}
+
+.datePickerContainer {
+	min-height: 382px;
+}
+
 .rdrInputRanges {
 	padding: 0 !important;
 }
@@ -34,6 +43,7 @@
 	.rdrDateRangePickerWrapper {
 		// other overrides
 		flex-direction: column;
+		//border: none;
 	}
 
 	.rdrMonth,
@@ -48,4 +58,13 @@
 	.rdrStaticRangeLabel {
 		text-align: center !important;
 	}
+
+	// .form-group {
+	// 	margin: 0 !important;
+	// }
+
+	// .btn,
+	// .form-control {
+	// 	border-radius: 0 !important;
+	// }
 }

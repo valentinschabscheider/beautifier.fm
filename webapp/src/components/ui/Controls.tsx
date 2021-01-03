@@ -7,7 +7,7 @@ import { InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Colors from "../../models/Colors";
 
-import { DateRangePicker } from "react-date-range";
+import { createStaticRanges, DateRangePicker } from "react-date-range";
 import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -15,8 +15,8 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import useStore from "../../store";
 
 export interface DateRange {
-	from: Date;
-	to: Date;
+	from: Date | undefined;
+	to: Date | undefined;
 }
 
 interface ControlsProps {
@@ -45,10 +45,38 @@ const Controls: React.FC<ControlsProps> = ({ startProcess }) => {
 
 		localStorage.setItem("userName", text);
 		startProcess(text, {
-			from: dateRange.startDate,
-			to: addDays(dateRange.endDate, 1),
+			from: dateRange.startDate !== null ? dateRange.startDate : undefined,
+			to:
+				dateRange.endDate !== null ? addDays(dateRange.endDate, 1) : undefined,
 		} as DateRange);
 	};
+
+	const now: Date = new Date();
+
+	const staticRanges = createStaticRanges([
+		{
+			label: "1 Year",
+			range() {
+				return {
+					startDate: new Date(
+						now.getFullYear() - 1,
+						now.getMonth(),
+						now.getDay()
+					),
+					endDate: now,
+				};
+			},
+		} as any,
+		{
+			label: "All",
+			range() {
+				return {
+					startDate: null,
+					endDate: null,
+				};
+			},
+		} as any,
+	]);
 
 	return (
 		<div id="controls">
@@ -74,6 +102,8 @@ const Controls: React.FC<ControlsProps> = ({ startProcess }) => {
 							</Button>
 						</InputGroup.Append>
 					</InputGroup>
+				</Form.Group>
+				<Form.Group className="datePickerContainer">
 					<DateRangePicker
 						onChange={(item: any) => setDateRange(item.selection)}
 						showSelectionPreview={true}
@@ -82,6 +112,8 @@ const Controls: React.FC<ControlsProps> = ({ startProcess }) => {
 						rangeColors={[Colors.accent]}
 						inputRanges={[]}
 						weekStartsOn={1}
+						staticRanges={staticRanges}
+						disabledDay={(date) => date > now}
 					/>
 				</Form.Group>
 			</Form>
