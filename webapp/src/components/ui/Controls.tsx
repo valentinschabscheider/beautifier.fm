@@ -8,9 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Colors from "../../models/Colors";
 
 import { createStaticRanges, DateRangePicker } from "react-date-range";
-import { addDays } from "date-fns";
-import "react-date-range/dist/styles.css"; // main style file
-import "react-date-range/dist/theme/default.css"; // theme css file
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import { addYears, addMonths, addDays, addWeeks } from "date-fns";
 
 import useStore from "../../store";
 
@@ -19,50 +19,47 @@ export interface DateRange {
 	to: Date | undefined;
 }
 
-interface ControlsProps {
-	startProcess: Function;
+interface CustomDateRangePickerProps {
+	range: DateRange;
+	setRange: Function;
 }
 
-const Controls: React.FC<ControlsProps> = ({ startProcess }) => {
-	//add datepicker with range
-
-	const isFetching = useStore((state) => state.isFetching);
-
-	const [text, setText] = useState<string>(
-		localStorage.getItem("userName") !== null
-			? String(localStorage.getItem("userName"))
-			: ""
-	);
-
+const CustomDateRangePicker: React.FC<CustomDateRangePickerProps> = ({
+	range,
+	setRange,
+}) => {
 	const [dateRange, setDateRange] = useState({
-		startDate: new Date(),
-		endDate: addDays(new Date(), -7),
+		startDate: range.from,
+		endDate: range.to,
 		key: "selection",
 	});
-
-	const onSubmit = (e: any) => {
-		e.preventDefault();
-
-		localStorage.setItem("userName", text);
-		startProcess(text, {
-			from: dateRange.startDate !== null ? dateRange.startDate : undefined,
-			to:
-				dateRange.endDate !== null ? addDays(dateRange.endDate, 1) : undefined,
-		} as DateRange);
-	};
 
 	const now: Date = new Date();
 
 	const staticRanges = createStaticRanges([
 		{
+			label: "1 Week",
+			range() {
+				return {
+					startDate: addWeeks(now, -1),
+					endDate: now,
+				};
+			},
+		} as any,
+		{
+			label: "1 Month",
+			range() {
+				return {
+					startDate: addMonths(now, -1),
+					endDate: now,
+				};
+			},
+		} as any,
+		{
 			label: "1 Year",
 			range() {
 				return {
-					startDate: new Date(
-						now.getFullYear() - 1,
-						now.getMonth(),
-						now.getDay()
-					),
+					startDate: addYears(now, -1),
 					endDate: now,
 				};
 			},
@@ -77,6 +74,57 @@ const Controls: React.FC<ControlsProps> = ({ startProcess }) => {
 			},
 		} as any,
 	]);
+
+	return (
+		<DateRangePicker
+			onChange={(item: any) => {
+				setDateRange(item.selection);
+				setRange({
+					from:
+						item.selection.startDate !== null
+							? item.selection.startDate
+							: undefined,
+					to:
+						item.selection.endDate !== null
+							? item.selection.endDate
+							: undefined,
+				});
+			}}
+			showSelectionPreview={true}
+			moveRangeOnFirstSelection={false}
+			ranges={[dateRange]}
+			rangeColors={[Colors.accent]}
+			inputRanges={[]}
+			weekStartsOn={1}
+			staticRanges={staticRanges}
+			disabledDay={(date) => date > now}
+		/>
+	);
+};
+interface ControlsProps {
+	startProcess: Function;
+}
+
+const Controls: React.FC<ControlsProps> = ({ startProcess }) => {
+	const isFetching = useStore((state) => state.isFetching);
+
+	const [text, setText] = useState<string>(
+		localStorage.getItem("userName") !== null
+			? String(localStorage.getItem("userName"))
+			: ""
+	);
+
+	const [dateRange, setDateRange] = useState<DateRange>({
+		from: addDays(new Date(), -7),
+		to: new Date(),
+	});
+
+	const onSubmit = (e: any) => {
+		e.preventDefault();
+
+		localStorage.setItem("userName", text);
+		startProcess(text, dateRange);
+	};
 
 	return (
 		<div id="controls">
@@ -104,17 +152,7 @@ const Controls: React.FC<ControlsProps> = ({ startProcess }) => {
 					</InputGroup>
 				</Form.Group>
 				<Form.Group className="datePickerContainer">
-					<DateRangePicker
-						onChange={(item: any) => setDateRange(item.selection)}
-						showSelectionPreview={true}
-						moveRangeOnFirstSelection={false}
-						ranges={[dateRange]}
-						rangeColors={[Colors.accent]}
-						inputRanges={[]}
-						weekStartsOn={1}
-						staticRanges={staticRanges}
-						disabledDay={(date) => date > now}
-					/>
+					<CustomDateRangePicker range={dateRange} setRange={setDateRange} />
 				</Form.Group>
 			</Form>
 		</div>
