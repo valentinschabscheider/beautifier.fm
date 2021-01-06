@@ -23,8 +23,10 @@ const fetchScrobbles = async (
 	addScrobbles: Function,
 	deleteScrobbles: Function
 ) => {
-	deleteScrobbles();
+	const INITIAL_PROGRESS = 5;
+
 	setProgress(0);
+	deleteScrobbles();
 
 	const lastfm = new LastFMTyped(
 		String(process.env.REACT_APP_LASTFM_API_KEY),
@@ -39,8 +41,13 @@ const fetchScrobbles = async (
 	const handleProgress = (page: number) => {
 		unfetchedPages.splice(unfetchedPages.indexOf(page), 1);
 		if (totalPages)
+			//calculate progress with minimum INITIAL_PROGRESS
 			setProgress(
-				Math.round(((totalPages - unfetchedPages.length) / totalPages) * 100)
+				Math.round(
+					(1 - INITIAL_PROGRESS / 100) *
+						(((totalPages - unfetchedPages.length) / totalPages) * 100) +
+						INITIAL_PROGRESS
+				)
 			);
 	};
 
@@ -88,7 +95,11 @@ const fetchScrobbles = async (
 		});
 	};
 
-	setProgress(1);
+	setTimeout(function () {
+		//start with INITIAL_PROGRESS progress
+		setProgress(INITIAL_PROGRESS);
+	}, 500);
+
 	fetchPage(1).then((result) => {
 		let { attr } = result;
 		totalPages = Number(attr.totalPages);
