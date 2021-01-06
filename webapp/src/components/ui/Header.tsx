@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,23 +6,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Header.scss";
 import logo from "../../img/logo/medium.png";
 
-import useStore from "../../store";
+import { useRuntimeStore } from "../../stores";
 
 interface HeaderProps {
 	toggleControls: Function;
 }
 
 const Header: React.FC<HeaderProps> = ({ toggleControls }) => {
-	const isFetching = useStore((state) => state.isFetching);
-
-	const [showControlsButton, setShowControlsButton] = useState(false);
-
-	if (!showControlsButton && isFetching) setShowControlsButton(true);
+	const showControlToggle = useRuntimeStore((state) => state.initialized);
 
 	return (
 		<header>
 			<img src={logo} alt="" className="logo" />
-			{showControlsButton && (
+			{showControlToggle && (
 				<Button
 					id="showControl"
 					variant="dark"

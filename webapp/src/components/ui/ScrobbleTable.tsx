@@ -3,12 +3,14 @@ import React from "react";
 import MaterialTable from "material-table";
 import { Paper } from "@material-ui/core";
 
-import useStore from "../../store";
+import { useScrobbleStore } from "../../stores";
+import shallow from "zustand/shallow";
 
 const ScrobbleTable: React.FC = () => {
-	const isLoading = useStore((state) => state.isFetching);
-
-	const scrobbles = useStore((state) => state.scrobbles);
+	const [isLoading, scrobbles] = useScrobbleStore(
+		(state) => [state.isFetching, state.scrobbles],
+		shallow
+	);
 
 	return (
 		<MaterialTable

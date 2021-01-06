@@ -20,33 +20,24 @@ import { duration as animationDuration } from "./models/Animation";
 
 import FullscreenContainer from "./components/ui/FullscreenContainer";
 
-import useStore from "./store";
+import { useScrobbleStore } from "./stores";
 
 import { DateRange } from "./components/ui/Controls";
+import shallow from "zustand/shallow";
 
 library.add(fas);
 
 const App: React.FC = () => {
 	const [showControls, setShowControls] = useState(true);
 
-	const setProgress = useStore((state) => state.setProgress);
-
-	const startedFetching = useStore((state) => state.startedFetching);
-	const finishededFetching = useStore((state) => state.finishededFetching);
-	const addScrobbles = useStore((state) => state.addScrobbles);
-	const deleteScrobbles = useStore((state) => state.deleteScrobbles);
+	const [setProgress, addScrobbles, deleteScrobbles] = useScrobbleStore(
+		(state) => [state.setProgress, state.addScrobbles, state.deleteScrobbles],
+		shallow
+	);
 
 	const goOrsmth: Function = (u: string, d: DateRange) => {
-		fetchScrobbles(
-			u,
-			d,
-			setProgress,
-			addScrobbles,
-			deleteScrobbles,
-			finishededFetching
-		);
+		fetchScrobbles(u, d, setProgress, addScrobbles, deleteScrobbles);
 		setShowControls(false);
-		startedFetching();
 	};
 
 	return (

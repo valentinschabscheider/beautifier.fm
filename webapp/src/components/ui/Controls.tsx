@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./Controls.scss";
 import { Form } from "react-bootstrap";
@@ -10,13 +10,28 @@ import * as Colors from "../../models/Colors";
 import { createStaticRanges, DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { addYears, addMonths, addDays, addWeeks } from "date-fns";
+import { addYears, addMonths, addWeeks } from "date-fns";
 
-import useStore from "../../store";
+import {
+	usePersistantStore,
+	useRuntimeStore,
+	useScrobbleStore,
+	resetScrobbleStore,
+} from "../../stores";
+import shallow from "zustand/shallow";
 
-export interface DateRange {
+export class DateRange {
 	from: Date | undefined;
 	to: Date | undefined;
+
+	constructor(from: Date | undefined, to: Date | undefined) {
+		this.from = from;
+		this.to = to;
+	}
+
+	isEqual(value: DateRange): Boolean {
+		return this.from === value.from && this.to === value.to;
+	}
 }
 
 interface CustomDateRangePickerProps {
@@ -28,12 +43,6 @@ const CustomDateRangePicker: React.FC<CustomDateRangePickerProps> = ({
 	range,
 	setRange,
 }) => {
-	const [dateRange, setDateRange] = useState({
-		startDate: range.from,
-		endDate: range.to,
-		key: "selection",
-	});
-
 	const now: Date = new Date();
 
 	const staticRanges = createStaticRanges([
@@ -77,22 +86,23 @@ const CustomDateRangePicker: React.FC<CustomDateRangePickerProps> = ({
 
 	return (
 		<DateRangePicker
-			onChange={(item: any) => {
-				setDateRange(item.selection);
-				setRange({
-					from:
-						item.selection.startDate !== null
-							? item.selection.startDate
-							: undefined,
-					to:
-						item.selection.endDate !== null
-							? item.selection.endDate
-							: undefined,
-				});
-			}}
+			onChange={(item: any) =>
+				setRange(
+					new DateRange(
+						item.selection.startDate || undefined,
+						item.selection.endDate || undefined
+					)
+				)
+			}
 			showSelectionPreview={true}
 			moveRangeOnFirstSelection={false}
-			ranges={[dateRange]}
+			ranges={[
+				{
+					startDate: range.from,
+					endDate: range.to,
+					key: "selection",
+				},
+			]}
 			rangeColors={[Colors.accent]}
 			inputRanges={[]}
 			weekStartsOn={1}
@@ -106,25 +116,56 @@ interface ControlsProps {
 }
 
 const Controls: React.FC<ControlsProps> = ({ startProcess }) => {
-	const isFetching = useStore((state) => state.isFetching);
+	const [userNameInput, setUserNameInput] = useState<string>("");
 
-	const [text, setText] = useState<string>(
-		localStorage.getItem("userName") !== null
-			? String(localStorage.getItem("userName"))
-			: ""
+	const [userName, setUserName] = usePersistantStore(
+		(state) => [state.userName, state.setUserName],
+		shallow
 	);
 
-	const [dateRange, setDateRange] = useState<DateRange>({
-		from: addDays(new Date(), -7),
-		to: new Date(),
-	});
+	const [
+		initialized,
+		initialize,
+		selectedDateRange,
+		setSelectedDateRange,
+	] = useRuntimeStore(
+		(state) => [
+			state.initialized,
+			state.initialize,
+			state.selectedDateRange,
+			state.setSelectedDateRange,
+		],
+		shallow
+	);
 
-	const onSubmit = (e: any) => {
-		e.preventDefault();
+	const [isFetching, addFetchedDateRange] = useScrobbleStore(
+		(state) => [state.isFetching, state.addFetchedDateRange],
+		shallow
+	);
 
-		localStorage.setItem("userName", text);
-		startProcess(text, dateRange);
+	const onSubmit = () => {
+		if (userNameInput !== userName) {
+			//check if text is valid user
+			if (true) {
+				setUserName(userNameInput);
+
+				if (initialized) resetScrobbleStore();
+			} else {
+				//show error message
+				return;
+			}
+		}
+
+		if (!initialized) initialize();
+
+		addFetchedDateRange(selectedDateRange);
+
+		startProcess(userNameInput, selectedDateRange);
 	};
+
+	useEffect(() => {
+		if (userName !== undefined) setUserNameInput(userName);
+	}, [userName]);
 
 	return (
 		<div id="controls">
@@ -135,15 +176,15 @@ const Controls: React.FC<ControlsProps> = ({ startProcess }) => {
 							type="text"
 							id="username"
 							placeholder="last.fm User"
-							autoFocus
-							value={text}
-							onChange={(e) => setText(e.target.value)}
+							autoFocus={!userName}
+							value={userNameInput}
+							onChange={(e) => setUserNameInput(e.target.value)}
 						/>
 						<InputGroup.Append>
 							<Button
 								id="go"
 								variant="dark"
-								onClick={(e) => onSubmit(e)}
+								onClick={() => onSubmit()}
 								disabled={isFetching}
 							>
 								<FontAwesomeIcon icon={["fas", "search"]} />
@@ -152,7 +193,10 @@ const Controls: React.FC<ControlsProps> = ({ startProcess }) => {
 					</InputGroup>
 				</Form.Group>
 				<Form.Group className="datePickerContainer">
-					<CustomDateRangePicker range={dateRange} setRange={setDateRange} />
+					<CustomDateRangePicker
+						range={selectedDateRange}
+						setRange={setSelectedDateRange}
+					/>
 				</Form.Group>
 			</Form>
 		</div>

@@ -14,7 +14,6 @@ export interface Scrobble {
 }
 interface ProcessedResponse {
 	attr: getRecentTracks["@attr"];
-	scrobbles: Array<Scrobble>;
 }
 
 const fetchScrobbles = async (
@@ -22,9 +21,11 @@ const fetchScrobbles = async (
 	dateRange: DateRange,
 	setProgress: Function,
 	addScrobbles: Function,
-	deleteScrobbles: Function,
-	finishededFetching: Function
+	deleteScrobbles: Function
 ) => {
+	deleteScrobbles();
+	setProgress(0);
+
 	const lastfm = new LastFMTyped(
 		String(process.env.REACT_APP_LASTFM_API_KEY),
 		undefined,
@@ -74,9 +75,10 @@ const fetchScrobbles = async (
 					}
 				);
 
+				addScrobbles(mapResponseToScrobbles(response.track));
+
 				resolve({
 					attr: response["@attr"],
-					scrobbles: mapResponseToScrobbles(response.track),
 				});
 
 				handleProgress(page);
@@ -86,10 +88,9 @@ const fetchScrobbles = async (
 		});
 	};
 
+	setProgress(1);
 	fetchPage(1).then((result) => {
-		let { attr, scrobbles } = result;
-		deleteScrobbles();
-		addScrobbles(scrobbles);
+		let { attr } = result;
 		totalPages = Number(attr.totalPages);
 		unfetchedPages.push(...Array.from({ length: totalPages }, (v, k) => k + 2));
 
@@ -102,11 +103,11 @@ const fetchScrobbles = async (
 					if (result.status === "rejected") {
 						console.log(result);
 					}
-					if (result.status === "fulfilled" && result.value) {
-						addScrobbles(result.value.scrobbles);
-					}
+					// if (result.status === "fulfilled" && result.value) {
+					// 	addScrobbles(result.value.scrobbles);
+					// }
 				});
-				finishededFetching();
+				setProgress(100);
 			}
 		);
 	});
