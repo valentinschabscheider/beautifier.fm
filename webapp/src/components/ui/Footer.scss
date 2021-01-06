@@ -47,6 +47,13 @@ footer {
 		&:focus {
 			outline: 0;
 		}
+
+		@media (max-width: 800px) {
+			transform: translate(5%, -100%);
+			left: 0;
+			width: 4rem;
+			height: 53px;
+		}
 	}
 
 	a {
