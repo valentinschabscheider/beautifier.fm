@@ -3,6 +3,8 @@ import React from "react";
 import MaterialTable from "material-table";
 import { Paper } from "@material-ui/core";
 
+import { buildLink } from "../utils";
+
 import { useScrobbleStore } from "../../stores";
 import shallow from "zustand/shallow";
 
@@ -19,25 +21,69 @@ const ScrobbleTable: React.FC = () => {
 					title: "",
 					field: "image",
 					cellStyle: { width: "2%" },
-					render: (rowData) => <img src={rowData.image} alt="" />,
+					render: (rowData) => (
+						<img
+							src={rowData.image}
+							onError={(img) => setFallbackImage(img)}
+							alt=""
+							height="34px"
+						/>
+					),
 				},
-				{ title: "Artist", field: "artist", cellStyle: { width: "20%" } },
-				{ title: "Track", field: "song", cellStyle: { width: "50%" } },
-				{ title: "Album", field: "album", cellStyle: { width: "28%" } },
-				{ title: "Timestamp", field: "timestamp", type: "datetime" },
+				{
+					title: "Artist",
+					field: "artist",
+					cellStyle: { width: "20%" },
+					render: (rowData) => (
+						<a href={buildLink(rowData.artist)}>{rowData.artist}</a>
+					),
+				},
+				{
+					title: "Track",
+					field: "song",
+					cellStyle: { width: "45%" },
+					render: (rowData) => (
+						<a href={buildLink(rowData.artist, "", rowData.song)}>
+							{rowData.song}
+						</a>
+					),
+				},
+				{
+					title: "Album",
+					field: "album",
+					cellStyle: { width: "33%" },
+					render: (rowData) => (
+						<a href={buildLink(rowData.artist, rowData.album)}>
+							{rowData.album}
+						</a>
+					),
+				},
+				{
+					title: "Timestamp",
+					field: "timestamp",
+					type: "datetime",
+					render: (rowData) => "01.01.2000",
+				},
 			]}
 			data={scrobbles}
 			title=""
 			options={{
-				pageSizeOptions: [10, 20, 50],
-				pageSize: 10,
+				pageSizeOptions: [15, 30, 70],
+				pageSize: 15,
 				headerStyle: { minHeight: "44px", zIndex: 0 },
 				searchFieldAlignment: "left",
+				padding: "dense",
+				rowStyle: { minHeight: "47px !important" },
 			}}
 			components={{ Container: (props) => <Paper {...props} elevation={0} /> }}
 			isLoading={isLoading && scrobbles.length === 0}
 		/>
 	);
 };
+
+// setFallbackImage(this)
+function setFallbackImage(image: any) {
+	image.src = "../img/no-cover.png";
+}
 
 export default ScrobbleTable;

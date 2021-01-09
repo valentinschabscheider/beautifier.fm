@@ -1,76 +1,74 @@
 @use "scss/animation";
 @use "scss/measures";
 @use "scss/colors";
-
 .App {
-	display: flex;
-	flex-direction: column;
-	min-height: measures.$app-min-height;
-	background-color: colors.$background;
+    display: flex;
+    flex-direction: column;
+    min-height: measures.$app-min-height;
+    background-color: colors.$background;
 }
 
 main {
-	position: relative;
-	width: 100%;
-	max-width: measures.$main-max-width;
-	min-height: 0;
-
-	flex-grow: 1;
-	align-self: center;
-
-	.control-container {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-
-		z-index: 100;
-		overflow: auto;
-
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
-		background-color: colors.$background;
-
-		&-enter {
-			height: 0%;
-		}
-
-		&-enter-active {
-			overflow-y: hidden;
-			height: 100%;
-			transition: all animation.$duration ease;
-		}
-
-		&-exit {
-			height: 100%;
-		}
-
-		&-exit-active {
-			overflow-y: hidden;
-			height: 0%;
-			transition: all animation.$duration ease;
-		}
-	}
-
-	.table-container {
-		height: 100%;
-		overflow: auto;
-	}
+    position: relative;
+    width: 100%;
+    max-width: measures.$main-max-width;
+    min-height: 0;
+    flex-grow: 1;
+    align-self: center;
+    .control-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        overflow: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: colors.$background;
+        &-enter {
+            height: 0%;
+        }
+        &-enter-active {
+            overflow-y: hidden;
+            height: 100%;
+            transition: all animation.$duration ease;
+        }
+        &-exit {
+            height: 100%;
+        }
+        &-exit-active {
+            overflow-y: hidden;
+            height: 0%;
+            transition: all animation.$duration ease;
+        }
+    }
+    .table-container {
+        height: 100%;
+        overflow: auto;
+    }
+    .table-container a {
+        text-decoration: none;
+        color: colors.$primary;
+    }
+    .table-container a:hover {
+        color: colors.$accent;
+    }
 }
 
 .progress-container-enter {
-	height: 0rem;
+    height: 0rem;
 }
+
 .progress-container-enter-active {
-	height: 1.5rem;
-	transition: all animation.$duration ease;
+    height: 1.5rem;
+    transition: all animation.$duration ease;
 }
 
 .progress-container-exit {
-	height: 1.5rem;
+    height: 1.5rem;
 }
+
 .progress-container-exit-active {
-	height: 0rem;
-	transition: all animation.$duration ease;
+    height: 0rem;
+    transition: all animation.$duration ease;
 }
