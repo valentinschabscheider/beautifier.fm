@@ -30,14 +30,12 @@ export const dateAsUnix: Function = (date: Date): number => {
 };
 
 export function buildLink(
+	userName: string,
 	artist: string,
 	album: string = "",
 	track: string = ""
 ) {
-	const libraryUrl: string = "https://www.last.fm/user/{0}/library/music/";
-
-	let userName: string = String(localStorage.getItem("userName"));
-	let baseUrl: string = libraryUrl.replace("{0}", userName);
+	let baseUrl: string = `https://www.last.fm/user/${userName}/library/music/`;
 
 	if (artist && !album && !track) {
 		return baseUrl + artist;

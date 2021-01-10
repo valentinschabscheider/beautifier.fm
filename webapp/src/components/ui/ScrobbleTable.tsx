@@ -6,6 +6,7 @@ import { Paper } from "@material-ui/core";
 import { buildLink } from "../utils";
 
 import { useScrobbleStore } from "../../stores";
+import { usePersistantStore } from "../../stores";
 import shallow from "zustand/shallow";
 
 const ScrobbleTable: React.FC = () => {
@@ -13,6 +14,8 @@ const ScrobbleTable: React.FC = () => {
 		(state) => [state.isFetching, state.scrobbles],
 		shallow
 	);
+
+	const userName = usePersistantStore((state) => state.userName);
 
 	return (
 		<MaterialTable
@@ -35,7 +38,9 @@ const ScrobbleTable: React.FC = () => {
 					field: "artist",
 					cellStyle: { width: "20%" },
 					render: (rowData) => (
-						<a href={buildLink(rowData.artist)}>{rowData.artist}</a>
+						<a href={buildLink(String(userName), rowData.artist)}>
+							{rowData.artist}
+						</a>
 					),
 				},
 				{
@@ -43,7 +48,14 @@ const ScrobbleTable: React.FC = () => {
 					field: "song",
 					cellStyle: { width: "45%" },
 					render: (rowData) => (
-						<a href={buildLink(rowData.artist, "", rowData.song)}>
+						<a
+							href={buildLink(
+								String(userName),
+								rowData.artist,
+								"",
+								rowData.song
+							)}
+						>
 							{rowData.song}
 						</a>
 					),
@@ -53,7 +65,9 @@ const ScrobbleTable: React.FC = () => {
 					field: "album",
 					cellStyle: { width: "33%" },
 					render: (rowData) => (
-						<a href={buildLink(rowData.artist, rowData.album)}>
+						<a
+							href={buildLink(String(userName), rowData.artist, rowData.album)}
+						>
 							{rowData.album}
 						</a>
 					),
