@@ -1,13 +1,23 @@
 @use "scss/colors";
+@use "scss/animation";
 
 .progress-container {
-	height: 1.5rem;
 	width: 100%;
-	background-color: colors.$secondary;
+	height: 100%;
+	position: absolute;
 }
 
 .progress-container .progress-bar {
+	height: 100%;
 	color: colors.$primary-font;
 	background-color: colors.$accent;
-	transition: width 4s;
+	transition: width animation.$progress-duration ease;
+}
+
+.progress-container-exit {
+	height: 100%;
+}
+.progress-container-exit-active {
+	height: 0%;
+	transition: all animation.$duration ease;
 }

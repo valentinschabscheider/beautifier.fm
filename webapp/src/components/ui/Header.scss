@@ -4,8 +4,6 @@
 header {
 	position: relative;
 
-	height: 4rem;
-
 	text-align: center;
 
 	background-color: colors.$primary;
@@ -22,8 +20,11 @@ header {
 
 #showControl {
 	height: 100% !important;
+	background: transparent;
+	border: none;
+	box-shadow: none;
+}
 
-	&:focus {
-		outline: 0 !important;
-	}
+.header-elements {
+	position: relative;
 }

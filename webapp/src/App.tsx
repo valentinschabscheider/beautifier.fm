@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import Header from "./components/ui/Header";
 import Footer from "./components/ui/Footer";
-import ProgressBar from "./components/ui/ProgressBar";
 import Controls from "./components/ui/Controls";
 import ScrobbleTable from "./components/ui/ScrobbleTable";
 
@@ -45,7 +44,6 @@ const App: React.FC = () => {
 			<Header
 				toggleControls={() => setShowControls((showControls) => !showControls)}
 			/>
-			<ProgressBar />
 			<main>
 				<CSSTransition
 					in={showControls}

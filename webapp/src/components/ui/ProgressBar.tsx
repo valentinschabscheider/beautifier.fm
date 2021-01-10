@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useScrobbleStore } from "../../stores";
 import { CSSTransition } from "react-transition-group";
-import { duration as animationDuration } from "../../models/Animation";
+import {
+	duration as animationDuration,
+	progressDuration,
+} from "../../models/Animation";
 
 import "./ProgressBar.scss";
 import shallow from "zustand/shallow";
@@ -34,14 +37,26 @@ const FetchingProgressBar: React.FC = () => {
 		shallow
 	);
 
+	const [show, setShow] = useState<boolean>(isFetching);
+
+	useEffect(() => {
+		if (isFetching) {
+			setShow(true);
+		} else {
+			setTimeout(() => {
+				setShow(false);
+			}, progressDuration * 2);
+		}
+	}, [isFetching]);
+
 	return (
 		<CSSTransition
-			in={isFetching}
+			in={show}
 			unmountOnExit
 			timeout={animationDuration}
 			classNames="progress-container"
 		>
-			<ProgressBar value={progress} />
+			<ProgressBar value={progress} text={null} />
 		</CSSTransition>
 	);
 };
