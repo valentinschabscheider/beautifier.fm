@@ -14,14 +14,14 @@ import { DateRange } from "./components/ui/Controls";
 // }
 
 type PersistantStoreState = {
-	userName: string | undefined;
+	userName: string;
 	setUserName: (userName: string) => void;
 };
 
 export const usePersistantStore = create<PersistantStoreState>(
 	persist(
 		(set) => ({
-			userName: undefined,
+			userName: "",
 			setUserName: (userName) => set({ userName }),
 		}),
 		{
@@ -47,7 +47,7 @@ export const useRuntimeStore = create<RuntimeStoreState>((set, get) => ({
 	initialize: () => set({ initialized: true }),
 }));
 
-type ScrobbleStoreState = {
+export type ScrobbleStoreState = {
 	isFetching: boolean;
 	progress: number | null;
 	setProgress: (progress: number) => void;

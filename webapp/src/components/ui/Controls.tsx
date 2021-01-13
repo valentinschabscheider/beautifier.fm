@@ -144,27 +144,23 @@ const Controls: React.FC<ControlsProps> = ({ startProcess }) => {
 	);
 
 	const onSubmit = () => {
-		if (userNameInput !== userName) {
+		if (userNameInput !== userName && userNameInput !== "") {
 			//check if text is valid user
-			if (true) {
-				setUserName(userNameInput);
-
-				if (initialized) resetScrobbleStore();
-			} else {
-				//show error message
-				return;
-			}
+			setUserName(userNameInput);
+			if (initialized) resetScrobbleStore();
 		}
 
 		if (!initialized) initialize();
 
 		addFetchedDateRange(selectedDateRange);
 
-		startProcess(userNameInput, selectedDateRange);
+		if (userNameInput !== "") {
+			startProcess(userNameInput, selectedDateRange);
+		}
 	};
 
 	useEffect(() => {
-		if (userName !== undefined) setUserNameInput(userName);
+		if (userName !== "" && userName !== undefined) setUserNameInput(userName);
 	}, [userName]);
 
 	return (

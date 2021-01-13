@@ -85,7 +85,7 @@ const Footer: React.FC<FooterProps> = ({ startVisible = true }) => {
 						</div>
 						<div className="column">
 							<h6>
-								© 2020 Copyright <a href="https://daval.dev">DAVAL</a>
+								<a href="https://daval.dev">© 2020 Copyright DAVAL</a>
 							</h6>
 						</div>
 					</div>
