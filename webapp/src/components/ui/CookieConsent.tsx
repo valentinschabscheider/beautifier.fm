@@ -6,8 +6,8 @@ const CookieConsent: React.FC = () => {
 	//save decition in context or block page
 	return (
 		<CookieConsentPaked
-			debug={process.env.NODE_ENV === "development"} //react context
-			buttonText="Sure man!!"
+			debug={false} //react context, process.env.NODE_ENV === "development"
+			buttonText="Accept"
 		>
 			This website uses cookies to enhance the user experience.
 		</CookieConsentPaked>

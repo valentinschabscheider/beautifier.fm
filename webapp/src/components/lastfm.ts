@@ -7,7 +7,7 @@ type RecentTrack = getRecentTracks["track"][0];
 
 export interface Scrobble {
 	song: string;
-	album: string | undefined;
+	album: string;
 	artist: string;
 	url: string;
 	image: string | undefined;
@@ -57,8 +57,8 @@ const fetchScrobbles = async (
 		return tracks.map((t) => {
 			return {
 				song: t.name,
-				album: t.album !== undefined ? t.album.name : undefined,
-				artist: t.artist !== undefined ? t.artist.name : "wtf is this",
+				album: t.album !== undefined ? t.album.name : "",
+				artist: t.artist !== undefined ? t.artist.name : "",
 				url: t.url,
 				image: t.image !== undefined ? t.image[0]["#text"] : undefined,
 			};

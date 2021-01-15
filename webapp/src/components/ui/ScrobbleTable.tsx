@@ -1,21 +1,77 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import MaterialTable from "material-table";
 import { Paper } from "@material-ui/core";
 
 import { buildLink } from "../utils";
 
-import { useScrobbleStore, ScrobbleStoreState } from "../../stores";
+import { useScrobbleStore } from "../../stores";
 import { usePersistantStore } from "../../stores";
 import shallow from "zustand/shallow";
 import { Scrobble } from "../lastfm";
 
+let emptyToggle: boolean = false;
+let singleToggle: boolean = false;
+let symbolToggle: boolean = false;
+
+// extend these regExes and consider using specific ones for each columm,
+// as e.g. a colon makes often perfect sense in album names
+let regex: RegExp = new RegExp(`[;:\[\\\\/]`);
+
 const ScrobbleTable: React.FC = () => {
-	const [isLoading, scrobbles] = useScrobbleStore(
+	const [isLoading, storeScrobbles] = useScrobbleStore(
 		(state) => [state.isFetching, state.scrobbles],
 		shallow
 	);
+
+	let [scrobbles, setScrobbles] = useState<Scrobble[]>([]);
 	const userName = usePersistantStore((state) => state.userName);
+
+	useEffect(() => {
+		setScrobbles(storeScrobbles);
+	}, [storeScrobbles]);
+
+	function filterEmptyAlbums(scrobblesParam: Scrobble[]) {
+		let filteredScrobbles = scrobblesParam.filter(function (o) {
+			return o.album === "";
+		});
+
+		if (emptyToggle) {
+			setScrobbles(storeScrobbles);
+			emptyToggle = false;
+		} else {
+			setScrobbles(filteredScrobbles);
+			emptyToggle = true;
+		}
+	}
+
+	function filterSingles(scrobblesParam: Scrobble[]) {
+		let filteredScrobbles = scrobblesParam.filter(function (o) {
+			return o.album === o.song;
+		});
+
+		if (singleToggle) {
+			setScrobbles(storeScrobbles);
+			singleToggle = false;
+		} else {
+			setScrobbles(filteredScrobbles);
+			singleToggle = true;
+		}
+	}
+
+	function filterSymbols(scrobblesParam: Scrobble[]) {
+		let filteredScrobbles = scrobblesParam.filter(function (o) {
+			return regex.test(o.artist) || regex.test(o.song) || regex.test(o.album);
+		});
+
+		if (symbolToggle) {
+			setScrobbles(storeScrobbles);
+			symbolToggle = false;
+		} else {
+			setScrobbles(filteredScrobbles);
+			symbolToggle = true;
+		}
+	}
 
 	return (
 		<MaterialTable
@@ -96,7 +152,7 @@ const ScrobbleTable: React.FC = () => {
 					tooltip: "Show empty album scrobbles",
 					position: "toolbar",
 					onClick: () => {
-						filterEmptyAlbums(scrobbles);
+						filterEmptyAlbums(storeScrobbles);
 					},
 				},
 				{
@@ -104,12 +160,20 @@ const ScrobbleTable: React.FC = () => {
 					tooltip: "Show scrobbles where album name and track are the same",
 					position: "toolbar",
 					onClick: () => {
-						filterSingles(scrobbles);
+						filterSingles(storeScrobbles);
+					},
+				},
+				{
+					icon: "emoji_symbols",
+					tooltip: "Show scrobbles containing odd symbols",
+					position: "toolbar",
+					onClick: () => {
+						filterSymbols(storeScrobbles);
 					},
 				},
 			]}
 			components={{ Container: (props) => <Paper {...props} elevation={0} /> }}
-			isLoading={isLoading && scrobbles.length === 0}
+			isLoading={isLoading && storeScrobbles.length === 0}
 		/>
 	);
 };
@@ -118,28 +182,6 @@ const ScrobbleTable: React.FC = () => {
 
 function setFallbackImage(image: any) {
 	image.src = "../img/no-cover.png";
-}
-
-function filterEmptyAlbums(scrobblesParam: Scrobble[]) {
-	let filteredScrobbles = scrobblesParam.filter(function (o) {
-		return o.album === "";
-	});
-
-	let state: ScrobbleStoreState = useScrobbleStore.getState();
-	state.scrobbles = filteredScrobbles;
-
-	// put actual back-and-forth toggling logic in here
-}
-
-function filterSingles(scrobblesParam: Scrobble[]) {
-	let filteredScrobbles = scrobblesParam.filter(function (o) {
-		return o.album === o.song;
-	});
-
-	let state: ScrobbleStoreState = useScrobbleStore.getState();
-	state.scrobbles = filteredScrobbles;
-
-	// put actual back-and-forth toggling logic in here
 }
 
 // #endregion
