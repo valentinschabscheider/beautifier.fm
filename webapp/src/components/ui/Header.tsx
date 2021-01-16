@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProgressBar from "./ProgressBar";
 
 import "./Header.scss";
-import logo from "../../img/logo/medium.png";
+import logo from "../../img/logo/beautifier.svg";
 
 import { useRuntimeStore } from "../../stores";
 
@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ toggleControls }) => {
 		<header>
 			<ProgressBar />
 			<div className="header-elements">
-				<img src={logo} alt="" className="logo" />
+				<img src={logo} alt="" className="logo" height="50px" />
 				{showControlToggle && (
 					<Button
 						id="showControl"
