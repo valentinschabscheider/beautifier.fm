@@ -94,7 +94,11 @@ const ScrobbleTable: React.FC = () => {
 					field: "artist",
 					cellStyle: { width: "20%" },
 					render: (rowData) => (
-						<a href={buildLink(String(userName), rowData.artist)}>
+						<a
+							href={buildLink(String(userName), rowData.artist)}
+							target="_blank"
+							rel="noreferrer"
+						>
 							{rowData.artist}
 						</a>
 					),
@@ -111,6 +115,8 @@ const ScrobbleTable: React.FC = () => {
 								"",
 								rowData.song
 							)}
+							target="_blank"
+							rel="noreferrer"
 						>
 							{rowData.song}
 						</a>
@@ -123,6 +129,8 @@ const ScrobbleTable: React.FC = () => {
 					render: (rowData) => (
 						<a
 							href={buildLink(String(userName), rowData.artist, rowData.album)}
+							target="_blank"
+							rel="noreferrer"
 						>
 							{rowData.album}
 						</a>

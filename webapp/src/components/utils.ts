@@ -35,17 +35,27 @@ export function buildLink(
 	album: string = "",
 	track: string = ""
 ) {
-	let baseUrl: string = `https://www.last.fm/user/${userName}/library/music/`;
+	let url: string = `https://www.last.fm/user/${userName}/library/music/`;
+
+	artist = replaceUrlSpecialChars(artist);
+	album = replaceUrlSpecialChars(album);
+	track = replaceUrlSpecialChars(track);
 
 	if (artist && !album && !track) {
-		return baseUrl + artist;
+		return url + artist;
 	}
 
 	if (artist && album && !track) {
-		return baseUrl + artist + "/" + album;
+		return url + artist + "/" + album;
 	}
 
 	if (artist && track && !album) {
-		return baseUrl + artist + "/_/" + track;
+		return url + artist + "/_/" + track;
 	}
+}
+
+function replaceUrlSpecialChars(url: string) {
+	url = url.replaceAll("/", "%2F");
+	url = url.replaceAll(" ", "+");
+	return url;
 }
