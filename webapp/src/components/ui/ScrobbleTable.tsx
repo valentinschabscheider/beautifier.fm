@@ -16,7 +16,7 @@ let symbolToggle: boolean = false;
 
 // extend these regExes and consider using specific ones for each columm,
 // as e.g. a colon makes often perfect sense in album names
-let regex: RegExp = new RegExp(`[;:\[\\\\/]`);
+let regex: RegExp = new RegExp(`[;:[\\\\/]`);
 
 const ScrobbleTable: React.FC = () => {
 	const [isLoading, storeScrobbles] = useScrobbleStore(
