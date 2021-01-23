@@ -59,3 +59,19 @@ function replaceUrlSpecialChars(url: string) {
 	url = url.replaceAll(" ", "+");
 	return url;
 }
+
+// first rudimentary version
+// consider creating a big dictionary/key-value object to retrieve
+// values from based on the input
+export function getEasterEgg(input: string) {
+	switch (input.toLowerCase()) {
+		case "weezer":
+			return "OO WEE OO";
+		case "oasis":
+			return "so anyway, here's Wonderwall...";
+		case "eminem":
+			return "will the real slim shady please stand up?";
+		case "rasputin":
+			return "RA RA RASPUTIN";
+	}
+}

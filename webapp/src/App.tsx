@@ -9,6 +9,7 @@ import "./App.scss";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
 
 import fetchScrobbles from "./components/lastfm";
 import CookieConsent from "./components/ui/CookieConsent";
@@ -25,6 +26,7 @@ import { DateRange } from "./components/ui/Controls";
 import shallow from "zustand/shallow";
 
 library.add(fas);
+library.add(fab);
 
 const App: React.FC = () => {
 	const [showControls, setShowControls] = useState(true);

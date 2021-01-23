@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import MaterialTable from "material-table";
 import { Paper } from "@material-ui/core";
 
-import { buildLink } from "../utils";
+import { buildLink, getEasterEgg } from "../utils";
 
 import { useScrobbleStore } from "../../stores";
 import { usePersistantStore } from "../../stores";
@@ -98,6 +98,7 @@ const ScrobbleTable: React.FC = () => {
 							href={buildLink(String(userName), rowData.artist)}
 							target="_blank"
 							rel="noreferrer"
+							title={getEasterEgg(rowData.artist)}
 						>
 							{rowData.artist}
 						</a>
@@ -117,6 +118,7 @@ const ScrobbleTable: React.FC = () => {
 							)}
 							target="_blank"
 							rel="noreferrer"
+							title={getEasterEgg(rowData.song)}
 						>
 							{rowData.song}
 						</a>
@@ -131,6 +133,7 @@ const ScrobbleTable: React.FC = () => {
 							href={buildLink(String(userName), rowData.artist, rowData.album)}
 							target="_blank"
 							rel="noreferrer"
+							title={getEasterEgg(rowData.album)}
 						>
 							{rowData.album}
 						</a>

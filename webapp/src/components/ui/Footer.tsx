@@ -13,8 +13,6 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ startVisible = true }) => {
-	//add ability to minimize footer or make scrobble table full screen
-
 	const [visible, setVisible] = useState<boolean>(startVisible);
 	const [collapsing, setCollapsing] = useState<boolean>(false);
 
@@ -29,7 +27,21 @@ const Footer: React.FC<FooterProps> = ({ startVisible = true }) => {
 				target="_blank"
 				rel="noreferrer"
 			>
-				{user}
+				<FontAwesomeIcon icon={["fab", "lastfm"]} />
+				&nbsp;
+			</a>
+		);
+	};
+
+	const InstagramUser: React.FC<LastFMUserProps> = ({ user }) => {
+		return (
+			<a
+				href={`https://www.instagram.com/${user}`}
+				target="_blank"
+				rel="noreferrer"
+			>
+				<FontAwesomeIcon icon={["fab", "instagram"]} />
+				&nbsp;
 			</a>
 		);
 	};
@@ -72,18 +84,22 @@ const Footer: React.FC<FooterProps> = ({ startVisible = true }) => {
 						</div>
 						<div className="column">
 							<div>
-								<h6>Creator's last.fm accounts</h6>
-								<ul>
+								<h6>Creators</h6>
+								<ul className="icon-section">
 									<li>
+										David &nbsp;
 										<LastFMUser user={"Pantera97"} />
+										<InstagramUser user={"salzmanndavid"} />
 									</li>
 									<li>
+										Valentin &nbsp;
 										<LastFMUser user={"mrvalstar"} />
+										<InstagramUser user={"valischabi"} />
 									</li>
 								</ul>
 							</div>
 						</div>
-						<div className="column">
+						<div className="column" id="daval">
 							<h6>
 								<a href="https://daval.dev">© 2020 Copyright DAVAL</a>
 							</h6>

@@ -1,87 +1,94 @@
 @use "scss/colors";
 @use "scss/animation";
 @use "scss/measures";
-
 footer {
 	position: relative;
 	max-height: measures.$footer-max-height;
-
 	.elements-container {
 		display: flex !important;
 		flex-direction: row;
 		justify-content: space-evenly;
 		align-items: center;
-
 		text-align: center;
-
 		background-color: colors.$primary;
 		color: colors.$primary-font;
-
+		a {
+			color: colors.$secondary;
+			text-decoration: none;
+		}
+		a:hover {
+			color: colors.$accent;
+		}
 		.column {
 			flex-basis: 100%;
 			padding: 0.5rem;
-
 			ul {
 				list-style: none;
 				padding: 0;
 				margin: 0;
 			}
 		}
-	}
-
-	#footer-toggle {
-		position: absolute;
-		transform: translate(-50%, -100%);
-		left: 50%;
-		z-index: 200;
-		height: 2rem;
-
-		border-top-left-radius: 0.25rem;
-		width: 5rem;
-		background-color: colors.$primary;
-		color: colors.$primary-font;
-		border: none;
-		border-top-right-radius: 0.25rem;
-		font-size: 1.3rem;
-
-		&:focus {
-			outline: 0;
-		}
-
-		@media (max-width: 800px) {
-			transform: translate(5%, -100%);
-			left: 0;
-			width: 4rem;
-			height: 53px;
+		@media only screen and (max-width: 600px) {
+			font-size: 0.7rem;
+			h6 {
+				font-size: 0.7rem;
+			}
+			.icon-section {
+				font-size: 1.1rem;
+			}
+			#daval {
+				display: none;
+			}
 		}
 	}
+}
 
-	a {
+#footer-toggle {
+	position: absolute;
+	transform: translate(-50%, -100%);
+	left: 50%;
+	z-index: 200;
+	height: 2rem;
+	border-top-left-radius: 0.25rem;
+	width: 5rem;
+	background-color: colors.$primary;
+	color: colors.$primary-font;
+	border: none;
+	border-top-right-radius: 0.25rem;
+	font-size: 1.3rem;
+	&:focus {
+		outline: 0;
+	}
+	@media (max-width: 800px) {
+		transform: translate(5%, -100%);
+		left: 0;
+		width: 4rem;
+		height: 53px;
+	}
+}
+
+a {
+	text-decoration: none;
+	color: colors.$primary-font;
+	&:hover {
 		text-decoration: none;
-		color: colors.$primary-font;
-
-		&:hover {
-			text-decoration: none;
-			color: colors.$accent;
-		}
+		color: colors.$accent;
 	}
+}
 
-	.buymeacoffee-button img {
-		width: 100%;
-		max-width: 12rem;
-	}
+.buymeacoffee-button img {
+	width: 100%;
+	max-width: 10rem;
 }
 
 .footer-collapse {
 	&-enter {
 		max-height: 0%;
 	}
-
 	&-enter-active {
 		max-height: measures.$footer-max-height;
 		transition: max-height animation.$duration ease;
 	}
-
 	&-exit-active {
 		max-height: 0%;
 		transition: max-height animation.$duration ease;
