@@ -162,6 +162,7 @@ const ScrobbleTable: React.FC = () => {
 					icon: "album",
 					tooltip: "Show empty album scrobbles",
 					position: "toolbar",
+					iconProps: { color: emptyToggle ? "secondary" : "default" },
 					onClick: () => {
 						filterEmptyAlbums(storeScrobbles);
 					},
@@ -170,6 +171,7 @@ const ScrobbleTable: React.FC = () => {
 					icon: "library_music",
 					tooltip: "Show scrobbles where album name and track are the same",
 					position: "toolbar",
+					iconProps: { color: singleToggle ? "secondary" : "default" },
 					onClick: () => {
 						filterSingles(storeScrobbles);
 					},
@@ -178,6 +180,7 @@ const ScrobbleTable: React.FC = () => {
 					icon: "emoji_symbols",
 					tooltip: "Show scrobbles containing odd symbols",
 					position: "toolbar",
+					iconProps: { color: symbolToggle ? "secondary" : "default" },
 					onClick: () => {
 						filterSymbols(storeScrobbles);
 					},
