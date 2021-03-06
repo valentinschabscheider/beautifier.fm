@@ -3,7 +3,7 @@ import { getRecentTracks } from "lastfm-typed/dist/interfaces/userInterface";
 import { DateRange } from "./ui/Controls";
 import { dateAsUnix } from "./utils";
 
-type RecentTrack = getRecentTracks["track"][0];
+type RecentTrack = getRecentTracks["tracks"][0];
 
 export interface Scrobble {
 	song: string;
@@ -11,9 +11,10 @@ export interface Scrobble {
 	artist: string;
 	url: string;
 	image: string | undefined;
+	date: string | undefined;
 }
 interface ProcessedResponse {
-	attr: getRecentTracks["@attr"];
+	attr: getRecentTracks;
 }
 
 const fetchScrobbles = async (
@@ -30,9 +31,7 @@ const fetchScrobbles = async (
 
 	const lastfm = new LastFMTyped(
 		String(process.env.REACT_APP_LASTFM_API_KEY),
-		undefined,
-		"beautifier.fm",
-		true
+		undefined
 	);
 
 	let totalPages: number = 0;
@@ -57,10 +56,11 @@ const fetchScrobbles = async (
 		return tracks.map((t) => {
 			return {
 				song: t.name,
-				album: t.album !== undefined ? t.album.name : "",
-				artist: t.artist !== undefined ? t.artist.name : "",
+				album: t.album.name,
+				artist: t.artist.name,
 				url: t.url,
-				image: t.image !== undefined ? t.image[0]["#text"] : undefined,
+				image: t.image[0].url,
+				date: t.date?.imf,
 			};
 		});
 	};
@@ -82,10 +82,10 @@ const fetchScrobbles = async (
 					}
 				);
 
-				addScrobbles(mapResponseToScrobbles(response.track));
+				addScrobbles(mapResponseToScrobbles(response.tracks));
 
 				resolve({
-					attr: response["@attr"],
+					attr: response,
 				});
 
 				handleProgress(page);
@@ -102,7 +102,7 @@ const fetchScrobbles = async (
 
 	fetchPage(1).then((result) => {
 		let { attr } = result;
-		totalPages = Number(attr.totalPages);
+		totalPages = Number(attr.meta.totalPages);
 		unfetchedPages.push(...Array.from({ length: totalPages }, (v, k) => k + 2));
 
 		handleProgress(1);

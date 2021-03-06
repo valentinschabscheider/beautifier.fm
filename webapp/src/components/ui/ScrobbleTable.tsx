@@ -143,7 +143,7 @@ const ScrobbleTable: React.FC = () => {
 					title: "Timestamp",
 					field: "timestamp",
 					type: "datetime",
-					render: (rowData) => "01.01.2000",
+					render: (rowData) => rowData.date,
 				},
 			]}
 			data={scrobbles}
